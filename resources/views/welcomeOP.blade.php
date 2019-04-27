@@ -1,4 +1,4 @@
-    @extends('layouts.templateMaster')
+    @extends('layouts.templateOPMaster')
     @section('content')
             <div class="block-header">
                 <h2>FORM EXAMPLES</h2>

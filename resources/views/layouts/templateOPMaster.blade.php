@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Admin | App Parkir</title>
+    <title>Operator | App Parkir</title>
     <!-- Favicon-->
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 
@@ -71,7 +71,7 @@
     <section>
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
-             @include('layouts.leftside')
+             @include('layouts.leftsideOP')
         </aside>
 
         <!-- Right Sidebar -->

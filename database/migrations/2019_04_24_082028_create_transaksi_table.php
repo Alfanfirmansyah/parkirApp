@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLaporanTable extends Migration
+class CreateTransaksiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateLaporanTable extends Migration
      */
     public function up()
     {
-        Schema::create('laporan', function (Blueprint $table) {
-            $table->bigIncrements('id_laporan');
+        Schema::create('transaksi', function (Blueprint $table) {
+            $table->bigIncrements('id_transaksi');
 			$table->unsignedBigInteger('id_customer');
-			$table->string('tgl');
-			$table->string('total_pendapatan');
+			$table->unsignedBigInteger('id_pricing');
+			$table->string('no_plat');
+			$table->string('tgl_masuk');
+			$table->string('tgl_keluar');
+			$table->string('status');
+			$table->unsignedBigInteger('id_user');
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ class CreateLaporanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('laporan');
+        Schema::dropIfExists('transaksi');
     }
 }

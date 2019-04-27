@@ -33,7 +33,7 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
-                    <li class="active">
+                    <li>
                         <a href="../../index.html">
                             <i class="material-icons">home</i>
                             <span>Home</span>
@@ -175,7 +175,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">assignment</i>
                             <span>Forms</span>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePlaceTable extends Migration
+class CreateCustomerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreatePlaceTable extends Migration
      */
     public function up()
     {
-        Schema::create('place', function (Blueprint $table) {
-            $table->bigIncrements('id_place');
+        Schema::create('customer', function (Blueprint $table) {
+            $table->bigIncrements('id_customer');
 			$table->unsignedBigInteger('id_user');
-			$table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 			$table->string('nama_place');
 			$table->longText('address');
 			$table->string('latitude');
@@ -32,6 +31,6 @@ class CreatePlaceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('place');
+        Schema::dropIfExists('customer');
     }
 }

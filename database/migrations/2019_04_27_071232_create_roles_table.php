@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLaporanTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateLaporanTable extends Migration
      */
     public function up()
     {
-        Schema::create('laporan', function (Blueprint $table) {
-            $table->bigIncrements('id_laporan');
-			$table->unsignedBigInteger('id_customer');
-			$table->string('tgl');
-			$table->string('total_pendapatan');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->bigIncrements('id_role');
+            $table->string('role');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateLaporanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('laporan');
+        Schema::dropIfExists('roles');
     }
 }

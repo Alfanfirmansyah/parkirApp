@@ -1,5 +1,6 @@
 <?php
-
+use App\http\middleware\IsAdmin;
+use App\http\middleware\IsOperator;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +15,16 @@
 Route::get('/', function () {
     return view('auth.login');
 });
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => IsAdmin::class], function () {
+	
+	Route::get('/admin', 'AdminController@index');
+	
+});
+
+Route::group(['middleware' => IsOperator::class], function () {
+	
+	Route::get('/operator', 'OperatorController@index');
+	
+});
