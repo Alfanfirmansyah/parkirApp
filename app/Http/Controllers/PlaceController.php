@@ -23,7 +23,8 @@ class PlaceController extends Controller
      */
     public function index(Request $request)
     {
-        $place= Place::all();
+		$id = \Auth::user()->id;
+        $place = Place::where('id_user', '=',[$id])->get();
         return view('operator.place.Dataplace',compact('place'));
         
     }
@@ -148,6 +149,28 @@ class PlaceController extends Controller
                     $place->save();
                     return redirect('/place')->with('success', 'Data place Berhasil Terupdate');
                 }                     
+    }
+	
+	public function updateImg(Request $request, $id)
+    {
+       $request->validate([
+            'filename'     =>'required',
+        ]);
+                  $place = Place::find($id);
+                   	if($request->hasfile('filename'))
+                    {
+                        foreach($request->file('filename') as $image)
+                        {
+                            $name=$image->getClientOriginalName();
+                            $image->move(public_path().'/images', $name);  
+                            $data[] = $name;  
+                        }
+                    }
+
+                    $place->img         = json_encode($data);
+                    $place->save();
+                    return redirect('/place')->with('success', 'Data place Berhasil Terupdate');
+                     
     }
 	
     /** 

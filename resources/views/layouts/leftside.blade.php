@@ -47,6 +47,12 @@
                             <span>Data Customer</span>
                         </a>
                     </li>
+					<li>
+                        <a href="/kategori">
+                            <i class="material-icons">list</i>
+                            <span>Data Kategori</span>
+                        </a>
+                    </li>
                
                    <li>
                         <a href="/role">

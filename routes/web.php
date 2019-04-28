@@ -23,14 +23,16 @@ Route::group(['middleware' => IsAdmin::class], function () {
 	Route::resource('customer','CustomerController');
 	Route::resource('user','UserController');
 	Route::resource('role','RoleController');
-
+	Route::resource('kategori','KategoriController');
 });
 
 Route::group(['middleware' => IsOperator::class], function () {
 	
 	Route::get('/operator', 'OperatorController@index');
 	Route::resource('place','PlaceController');
-	Route::resource('kategori','KategoriController');
+	Route::post('/updateImgParking/{id}', 'PlaceController@updateImg');
+	Route::resource('pricing','PriceController');
+
 	
 });
 

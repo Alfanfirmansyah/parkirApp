@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Place;
+use \Auth;
 
 class OperatorController extends Controller
 {
@@ -23,6 +25,14 @@ class OperatorController extends Controller
      */
     public function index()
     {
-        return view('welcomeOP');
-    }
+		$id = \Auth::user()->id;
+		$tgl = date('l, d-m-Y');
+		$place = Place::where('id_user', '=',[$id])->get();
+		
+		if(!$place->isEmpty()){
+			return view('welcomeOPscan', compact('tgl'));
+		}else{
+			return view('welcomeOP', compact('tgl'));
+		}    
+	}
 }

@@ -11,5 +11,8 @@ class Kategori extends Model
      protected $fillable = [
         'kendaraan'
     ];
-
+	
+	
+	
+	
 }   

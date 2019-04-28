@@ -30,14 +30,14 @@
             <div class="menu">
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
-                    <li>
-                        <a href="../../index.html">
-                            <i class="material-icons">home</i>
-                            <span>Home</span>
+                    <li class="active">
+                        <a href="{{ url('operator')}}">
+                            <i class="material-icons">dashboard</i>
+                            <span>Dashboard</span>
                         </a>
                     </li>
                   
-                    <li class="active">
+                    <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">assignment</i>
                             <span>Manage Parking Place </span>
@@ -45,170 +45,31 @@
                         <ul class="ml-menu">
                             <li>
                                 <a href="/place/">Data Parking Place</a>
-                                <a href="/place/create">Create Parking Place</a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">view_list</i>
-                            <span>Manage Kategori</span>
+                            <i class="material-icons">attach_money</i>
+                            <span>Manage Pricing Kendaraan</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/kategori">Data Kategori Kendaraan</a>
+                                <a href="/pricing">Data Pricing</a>
                             </li>
                         </ul>
                     </li>
-                    <li>
+					<li>
                         <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">perm_media</i>
-                            <span>Medias</span>
+                            <i class="material-icons">receipt</i>
+                            <span>Laporan Parking</span>
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="../../pages/medias/image-gallery.html">Image Gallery</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/medias/carousel.html">Carousel</a>
+                                <a href="/transaksi">Data Parking</a>
+                                <a href="/cetak">Print Daily Parking</a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">pie_chart</i>
-                            <span>Charts</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="../../pages/charts/morris.html">Morris</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/charts/flot.html">Flot</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/charts/chartjs.html">ChartJS</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/charts/sparkline.html">Sparkline</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/charts/jquery-knob.html">Jquery Knob</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">content_copy</i>
-                            <span>Example Pages</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="../../pages/examples/profile.html">Profile</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/examples/sign-in.html">Sign In</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/examples/sign-up.html">Sign Up</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/examples/forgot-password.html">Forgot Password</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/examples/blank.html">Blank Page</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/examples/404.html">404 - Not Found</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/examples/500.html">500 - Server Error</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">map</i>
-                            <span>Maps</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="../../pages/maps/google.html">Google Map</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/maps/yandex.html">YandexMap</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/maps/jvectormap.html">jVectorMap</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">trending_down</i>
-                            <span>Multi Level Menu</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <span>Menu Item</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);">
-                                    <span>Menu Item - 2</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" class="menu-toggle">
-                                    <span>Level - 2</span>
-                                </a>
-                                <ul class="ml-menu">
-                                    <li>
-                                        <a href="javascript:void(0);">
-                                            <span>Menu Item</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" class="menu-toggle">
-                                            <span>Level - 3</span>
-                                        </a>
-                                        <ul class="ml-menu">
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <span>Level - 4</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="../changelogs.html">
-                            <i class="material-icons">update</i>
-                            <span>Changelogs</span>
-                        </a>
-                    </li>
-                    <li class="header">LABELS</li>
-                    <li>
-                        <a href="javascript:void(0);">
-                            <i class="material-icons col-red">donut_large</i>
-                            <span>Important</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);">
-                            <i class="material-icons col-amber">donut_large</i>
-                            <span>Warning</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);">
-                            <i class="material-icons col-light-blue">donut_large</i>
-                            <span>Information</span>
-                        </a>
                     </li>
                 </ul>
             </div>

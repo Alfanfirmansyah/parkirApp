@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pricing;
 use App\Kategori;
 use DB;
 use \Auth;
 use Illuminate\Support\Facades\Session;
 
-
-
-class KategoriController extends Controller
+class PriceController extends Controller
 {
-    public function __construct()
+	public function __construct()
     {
         $this->middleware(['auth']);
     }
@@ -23,18 +22,20 @@ class KategoriController extends Controller
      */
     public function index()
     {
+		$id = \Auth::user()->id;
         $kategori= Kategori::all();
-        return view('admin.kategori.DataKategori',compact('kategori'));
+        $price= Pricing::where('id_user', '=',[$id])->get();
+        return view('operator.pricing.DataPrice',compact('kategori','price'));
     }
-
 
     /**
      * Show the form for creating a new resource.
-     *
+     *	
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {        
+    {
+        //
     }
 
     /**
@@ -46,16 +47,18 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kendaraan'         =>'required'
+            'id_kategori'         =>'required',
+            'harga'         =>'required'
  
         ]);
         
-          $kategori = new Kategori([
-          'kendaraan'   => $request->get('kendaraan'),
+          $price = new Pricing([
+          'id_kategori'   => $request->get('id_kategori'),
+          'harga'   => $request->get('harga'),
+          'id_user'   => $request->get('id_user'),
           ]);
-          $kategori->save();
-          return redirect('/kategori')->with('success','Berhasil Menambah Data');
-    
+          $price->save();
+          return redirect('/pricing')->with('success','Berhasil Menambah Data');
     }
 
     /**
@@ -66,7 +69,7 @@ class KategoriController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -77,8 +80,9 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        $kategori = Kategori::find($id);
-        return view('admin.kategori.Editkategori',compact('kategori'));
+        $kategori = Kategori::all();
+		$price    = Pricing::find($id);
+        return view('operator.pricing.EditPrice',compact('kategori','price'));
     }
 
     /**
@@ -90,27 +94,29 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'kendaraan'   =>'required',
+          $request->validate([
+            'id_kategori'         =>'required',
+            'harga'         =>'required'
+ 
         ]);
    
-        $kategori = Kategori::find($id);
-        $kategori->kendaraan     = $request->get('kendaraan');
-        $kategori->save();
-        return redirect('/kategori')->with('success', 'Data kategori Berhasil Terupdate');
-                  
-        }
-	
-    /** 
-     * Remove the specified resou   rce from storage.
+        $price = Pricing::find($id);
+        $price->id_kategori     = $request->get('id_kategori');
+        $price->harga     = $request->get('harga');
+        $price->save();
+        return redirect('/pricing')->with('success', 'Data kategori Berhasil Terupdate');
+    }
+
+    /**
+     * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $kategori = Kategori::find($id);
-        $kategori->delete();
-        return redirect('/kategori')->with('success', 'Data kategori Berhasil Dihapus');
+       $price = Pricing::find($id);
+       $price->delete();
+       return redirect('/pricing')->with('success', 'Data kategori Berhasil Dihapus');
     }
 }

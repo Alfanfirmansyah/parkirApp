@@ -1,4 +1,4 @@
-@extends('layouts.templateOPMaster')
+@extends('layouts.templateMaster')
 @section('content')
 <style>
     #map-canvas{
