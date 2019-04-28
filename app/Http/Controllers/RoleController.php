@@ -14,7 +14,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $role= Role::all();
+        return view('admin.role.DataRole',compact('role'));
     }
 
     /**
@@ -35,7 +36,16 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'role'         =>'required'
+ 
+        ]);
+        
+          $role = new role([
+          'role'   => $request->get('role'),
+          ]);
+          $role->save();
+          return redirect('/role')->with('success','Berhasil Menambah Data');
     }
 
     /**
@@ -55,9 +65,10 @@ class RoleController extends Controller
      * @param  \App\role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(role $role)
+    public function edit($id)
     {
-        //
+        $role = role::find($id);
+        return view('admin.role.EditRole',compact('role'));
     }
 
     /**
@@ -67,9 +78,17 @@ class RoleController extends Controller
      * @param  \App\role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, role $role)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'role'   =>'required',
+        ]);
+   
+        $role = Role::find($id);
+        $role->role     = $request->get('role');
+        $role->save();
+        return redirect('/role')->with('success', 'Data role Berhasil Terupdate');
+                  
     }
 
     /**
@@ -80,6 +99,8 @@ class RoleController extends Controller
      */
     public function destroy(role $role)
     {
-        //
+        $role = Role::find($id);
+        $role->delete();
+        return redirect('/role')->with('success', 'Data role Berhasil Dihapus');
     }
 }

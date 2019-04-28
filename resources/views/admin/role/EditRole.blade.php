@@ -1,4 +1,4 @@
-@extends('layouts.templateOPMaster')
+@extends('layouts.templateMaster')
 @section('content')
 <style>
     #map-canvas{
@@ -11,11 +11,11 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    Edit Data Kategori
+                    Edit Data Role
                 </h2>
             </div>
             <div class="body">
-               <form method="post" action="{{ route('kategori.update',$kategori->id_kategori) }}" enctype="multipart/form-data">
+               <form method="post" action="{{ route('role.update',$role->id_role) }}" enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
                 @if ($errors->any())
@@ -31,7 +31,7 @@
                 @endif 
                     <div class="form-group">
                         <div class="form-line">
-                            <input type="text" class="form-control" value="{{$kategori->kendaraan}}" name="kendaraan" />
+                            <input type="text" class="form-control" value="{{$role->role}}" name="role" />
                         </div>
                     </div>
                     <div class="form-group">

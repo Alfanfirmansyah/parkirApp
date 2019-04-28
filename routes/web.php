@@ -22,6 +22,7 @@ Route::group(['middleware' => IsAdmin::class], function () {
 	Route::get('/admin', 'AdminController@index');
 	Route::resource('customer','CustomerController');
 	Route::resource('user','UserController');
+	Route::resource('role','RoleController');
 
 });
 
