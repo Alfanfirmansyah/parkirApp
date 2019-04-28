@@ -21,6 +21,7 @@
                                         <tr>
                                             <th>Nama Place</th>
                                             <th>Address</th>
+                                            <th>Status</th>
                                             <th>Image</th>
                                             <th class="col-md-2">Aksi</th>
                                       
@@ -32,12 +33,21 @@
                                             <td>{{$row->nama_place}}</td>
                                             <td>{{$row->address}}</td>
                                             <td>
+                                            <?php 
+                                            if($row->status == 'Belum diverifikasi') {?>
+                                            <button class="btn btn-danger btn-sm">{{$row->status}}</button>
+                                            <?php } else if($row->status== 'Terverifikasi') {?>
+                                            <button class="btn btn-success btn-sm">{{$row->status}}</button>
+
+                                            <?php } ?>
+                                            </td>
+                                            <td>
                                             <?php foreach (json_decode($row->img)as $gambar) { ?>									
                                                 <div class="item">
                                                     <img style="width:250px; height:250px" src="{{ asset('/images/'.$gambar) }}">
                                                 </div>
                                             <?php } ?>
-                                            </td>
+                                
                                             <td>
                                                 <form action="{{ route('place.destroy', $row->id_customer)}}" method="post">
                                                 @csrf
