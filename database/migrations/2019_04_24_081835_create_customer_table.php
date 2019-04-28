@@ -20,6 +20,7 @@ class CreateCustomerTable extends Migration
 			$table->longText('address');
 			$table->string('latitude');
 			$table->string('longitude');
+			$table->string('status');
 			$table->longText('img')->nullable;
             $table->timestamps();
         });

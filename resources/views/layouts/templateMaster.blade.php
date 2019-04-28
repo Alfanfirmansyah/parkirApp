@@ -27,11 +27,14 @@
     <!-- Custom Css -->
     <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet">
 
+    <link href="{{ asset('assets/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
+  <!-- JQuery DataTable Css -->
+    <link href="{{ asset('assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{ asset('assets/css/themes/all-themes.css')}}" rel="stylesheet" />
 </head>
 
-<body class="theme-red">
+<body class="theme-light-green">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -106,6 +109,19 @@
 
     <!-- Demo Js -->
     <script src="{{ asset('assets/js/demo.js')}}"></script>
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="{{ asset('assets/plugins/jquery-datatable/jquery.dataTables.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/jszip.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
+
+    <!-- Custom Js -->
+    <script src="{{ asset('assets/js/pages/tables/jquery-datatable.js')}}"></script>
 </body>
 
 </html>

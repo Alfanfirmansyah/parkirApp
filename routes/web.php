@@ -20,11 +20,17 @@ Auth::routes();
 Route::group(['middleware' => IsAdmin::class], function () {
 	
 	Route::get('/admin', 'AdminController@index');
-	
+	Route::resource('customer','CustomerController');
+	Route::resource('user','UserController');
+
 });
 
 Route::group(['middleware' => IsOperator::class], function () {
 	
 	Route::get('/operator', 'OperatorController@index');
+	Route::resource('place','PlaceController');
+	Route::resource('kategori','KategoriController');
 	
 });
+
+

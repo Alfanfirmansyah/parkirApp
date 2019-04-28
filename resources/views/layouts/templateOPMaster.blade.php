@@ -8,12 +8,13 @@
     <!-- Favicon-->
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 
-    <!-- Google Fonts -->
+ <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
     <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.css')}}" rel="stylesheet">
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAafgoWn7nSfw4o5ctci8yvyWOQmAD93g4&libraries=places"></script>
 
     <!-- Waves Effect Css -->
     <link href="{{ asset('assets/plugins/node-waves/waves.css')}}" rel="stylesheet" />
@@ -24,6 +25,8 @@
     <!-- Sweet Alert Css -->
     <link href="{{ asset('assets/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet" />
 
+    <!-- JQuery DataTable Css -->
+    <link href="{{ asset('assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
     <!-- Custom Css -->
     <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet">
 
@@ -31,7 +34,7 @@
     <link href="{{ asset('assets/css/themes/all-themes.css')}}" rel="stylesheet" />
 </head>
 
-<body class="theme-red">
+<body class="theme-cyan">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -106,6 +109,24 @@
 
     <!-- Demo Js -->
     <script src="{{ asset('assets/js/demo.js')}}"></script>
+
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="{{ asset('assets/plugins/jquery-datatable/jquery.dataTables.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.flash.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/jszip.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/pdfmake.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
+
+    <!-- Custom Js -->
+    <script src="{{ asset('assets/js/pages/tables/jquery-datatable.js')}}"></script>
+
+    <!-- Map -->
+   
+   
 </body>
 
 </html>
