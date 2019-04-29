@@ -32,8 +32,7 @@ Route::group(['middleware' => IsOperator::class], function () {
 	Route::resource('place','PlaceController');
 	Route::post('/updateImgParking/{id}', 'PlaceController@updateImg');
 	Route::resource('pricing','PriceController');
-
-	
+	Route::resource('transaksi','TransaksiController');
 });
 
 

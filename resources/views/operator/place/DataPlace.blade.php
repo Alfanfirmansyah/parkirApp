@@ -14,8 +14,6 @@
                                 Data Parking Place
                             </h2>
                         </div>
-
-                    
                         <div class="body">
                             <div class="table-responsive">
                                     @if(session()->get('success'))
@@ -23,7 +21,7 @@
                                         {{ session()->get('success') }}  
                                     </div><br />
                                     @endif
-									
+							
 				@foreach($place as $row)
                 <!-- With Captions -->
                 <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
@@ -165,7 +163,7 @@
     
         
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
+<script src="{{ asset('assets/js/gmaps.js') }}"> </script>
                 <!-- #END# With Captions -->
                 @endforeach
                            </div>
