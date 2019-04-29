@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Place;
+<<<<<<< HEAD
 use App\User;
+=======
+use App\Pricing;
+>>>>>>> 477b4d50a29ae8f880f1d63c6da59c975195ecc9
 use \Auth;
+
 
 class OperatorController extends Controller
 {
@@ -27,11 +32,18 @@ class OperatorController extends Controller
     public function index()
     {
 		$id = \Auth::user()->id;
-		$tgl = date('l, d-m-Y');
+        $tgl = date('l, d-m-Y');
+        $tgl2 = date('d-m-Y H:i');
 		$place = Place::where('id_user', '=',[$id])->get();
-		
+        $price = Pricing::join('kategori', 'pricing.id_kategori' ,'=', 'kategori.id_kategori')
+						->select('kategori.*','pricing.*')
+						->where('pricing.id_user', '=' ,[$id])
+						->get();
+        
+
+        
 		if(!$place->isEmpty()){
-			return view('welcomeOPscan', compact('tgl'));
+			return view('welcomeOPscan', compact('tgl','tgl2','price'));
 		}else{
 			return view('welcomeOP', compact('tgl'));
 		}    

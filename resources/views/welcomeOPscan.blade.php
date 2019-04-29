@@ -48,7 +48,60 @@
                             </h2>
                         </div>
                         <div class="body">
+						<form method="post" target="__blank" action="{{ route('transaksi.store') }}" enctype="multipart/form-data">
+						@csrf
+						@if ($errors->any())
+						<div class="col-md-10">
+							<div class="alert alert-danger">
+								 <ul>
+									@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+									@endforeach
+								 </ul>
+							</div>
+						</div>
+						@endif 
+
+							<div class="input-group">
+								 <span class="input-group-addon">
+								 <i class="material-icons">person_pin_circle</i>
+								 </span>                       
+								<div class="form-line">
+									<input type="text" class="form-control" autocomplete="off" required placeholder="No-Plat" name="no_plat" />
+								</div>
+							</div>
+
 							
+							<div class="input-group">
+											<span class="input-group-addon">
+                                                <i class="material-icons">category</i>
+                                            </span>
+                                         	<select class="form-control show-tick" required name="id_price">
+											<option value="">- Select Jenis Kendaraan- </option>
+												@foreach($price as $row)
+												<option value="{{ $row->id_price }}">{{ $row->kendaraan }}</option>
+												@endforeach
+											</select>
+                                        </div>
+							
+								<div class="input-group">
+								 <span class="input-group-addon">
+								 <i class="material-icons">date_range</i>
+								 </span>
+								<?php $kode = 'TR-'.date('his');?>
+								<div class="form-line">
+									<input type="text" readonly class="form-control" value="{{ $tgl2 }}" name="tgl_masuk" />
+									<input type="hidden" readonly class="form-control" value="{{ $kode }}" name="qrcode" />
+								</div>
+								</div>
+								 
+							<div class="form-group">
+								<button type="Submit" class="btn btn-info waves-effect" data-toggle="modal" data-target="#defaultModal">
+									<i style="color:#fff" class="material-icons">save</i>
+									<span>Check In</span>
+								</button>
+							</div>  							
+							</form> 
 							
 											
 						</div>
@@ -61,7 +114,6 @@
 								<script type="module">
 									import QrScanner from "/assets/data_scanner/qr-scanner.min.js";
 									QrScanner.WORKER_PATH = '/assets/data_scanner/qr-scanner-worker.min.js';
-
 									const video = document.getElementById('qr-video');
 									const camHasCamera = document.getElementById('cam-has-camera');
 									const camQrResult = document.getElementById('cam-qr-result');

@@ -6,6 +6,7 @@
    height:300px;
 }
 </style>
+ <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAafgoWn7nSfw4o5ctci8yvyWOQmAD93g4&libraries=places"></script>
 <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -14,8 +15,6 @@
                                 Data Parking Place
                             </h2>
                         </div>
-
-                    
                         <div class="body">
                             <div class="table-responsive">
                                     @if(session()->get('success'))
@@ -23,7 +22,7 @@
                                         {{ session()->get('success') }}  
                                     </div><br />
                                     @endif
-									
+							
 				@foreach($place as $row)
                 <!-- With Captions -->
                 <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
@@ -165,7 +164,7 @@
     
         
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
+<script src="{{ asset('assets/js/gmaps.js') }}"> </script>
                 <!-- #END# With Captions -->
                 @endforeach
                            </div>

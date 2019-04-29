@@ -15,6 +15,7 @@ class CreateTransaksiTable extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->bigIncrements('id_transaksi');
+			$table->string('kode_qrcode',50)->unique();
 			$table->unsignedBigInteger('id_customer');
 			$table->unsignedBigInteger('id_pricing');
 			$table->string('no_plat');

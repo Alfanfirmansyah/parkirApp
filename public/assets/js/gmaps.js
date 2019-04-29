@@ -2406,4 +2406,8 @@ if (!Array.prototype.indexOf) {
 }
 
 return GMaps;
+<<<<<<< HEAD
 }));
+=======
+}));
+>>>>>>> 477b4d50a29ae8f880f1d63c6da59c975195ecc9
