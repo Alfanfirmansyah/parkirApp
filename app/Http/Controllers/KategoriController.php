@@ -97,9 +97,8 @@ class KategoriController extends Controller
         $kategori = Kategori::find($id);
         $kategori->kendaraan     = $request->get('kendaraan');
         $kategori->save();
-        return redirect('/kategori')->with('success', 'Data kategori Berhasil Terupdate');
-                  
-        }
+        return redirect('/kategori')->with('success', 'Data kategori Berhasil Terupdate');              
+    }
 	
     /** 
      * Remove the specified resou   rce from storage.

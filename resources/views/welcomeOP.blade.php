@@ -186,5 +186,6 @@
     
         
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
+<script src="{{ asset('assets/js/gmaps.js')}}"></script>
+
         @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Place;
+use App\User;
 use \Auth;
 
 class OperatorController extends Controller
@@ -34,5 +35,48 @@ class OperatorController extends Controller
 		}else{
 			return view('welcomeOP', compact('tgl'));
 		}    
-	}
+    }
+
+    public function profil()
+    {
+        $operator = User::where('id',auth()->user()->id )->get();
+        return view('operator.profile.DataProfile',compact('operator'));
+    }
+
+    public function edit($id)
+    {
+        $operator = User::find($id);
+        return view('operator.profile.DataProfile',compact('operator'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name'      =>'required',
+            'email'     =>'required',
+            'address'   =>'required',
+            'telp'      =>'required' 
+        ]);
+   
+        $operator = User::find($id);
+        $operator->name     = $request->get('name');
+        $operator->email    = $request->get('email');
+        $operator->address  = $request->get('address');
+        $operator->telp     = $request->get('telp');
+        $operator->save();
+        return redirect('http://localhost:8000/operator/2/edit')->with('success', 'Data operator Berhasil Terupdate');              
+    }
+
+    public function UpdatePass(Request $request, $id)
+    {
+      
+        $request->validate([
+            'password' => 'required|string|min:6|different:current_password|confirmed',
+
+        ]);
+        $operator = User::find($id);
+        $operator->password = Hash::make($request->input('password'));
+        $operator->save();
+        return redirect('http://localhost:8000/operator/2/edit')->with('success', 'Data operator Berhasil Terupdate');              
+    }
 }

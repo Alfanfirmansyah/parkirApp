@@ -1,6 +1,6 @@
 @extends('layouts.templateLogin')
 @section('content')
- <form id="sign_up" method="POST" action="{{ route('register') }}">
+            <form id="sign_up" method="POST" action="{{ route('register') }}">
 				@csrf
                     <div class="msg">Register a new membership</div>
                     <div class="input-group">

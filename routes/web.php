@@ -28,7 +28,8 @@ Route::group(['middleware' => IsAdmin::class], function () {
 
 Route::group(['middleware' => IsOperator::class], function () {
 	
-	Route::get('/operator', 'OperatorController@index');
+	Route::resource('operator', 'OperatorController');
+	Route::post('/UpdatePass/{id}', 'OperatorController@UpdatePass');
 	Route::resource('place','PlaceController');
 	Route::post('/updateImgParking/{id}', 'PlaceController@updateImg');
 	Route::resource('pricing','PriceController');
