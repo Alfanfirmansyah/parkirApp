@@ -15,7 +15,7 @@
 
     <!-- Bootstrap Core Css -->
     <link href="{{ asset('assets/plugins/bootstrap/css/bootstrap.css')}}" rel="stylesheet">
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAafgoWn7nSfw4o5ctci8yvyWOQmAD93g4&libraries=places"></script>
+   
 
     <!-- Waves Effect Css -->
     <link href="{{ asset('assets/plugins/node-waves/waves.css')}}" rel="stylesheet" />

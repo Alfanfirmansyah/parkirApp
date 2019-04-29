@@ -20,9 +20,9 @@
                 <!-- With Captions -->
                 <div class="col-lg-12">
                         <div class="body">
-						<div class="col-md-6">
+						<div class="col-md-12">
 					
-						{!! $tiket !!}<br>
+						{!! $tiket !!}
                        kode transaksi {{ $kode }}<br>
                        no plat {{ $no_plat }} <br>
                        jam {{ $tgl_masuk }} <br>
