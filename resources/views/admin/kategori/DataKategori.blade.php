@@ -95,7 +95,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                BASIC EXAMPLE
+                                Data Kategori
                             </h2>
                             <ul class="header-dropdown m-r--5" style="margin-top:-1%">
                                  <button type="button" class="btn btn-info waves-effect" data-toggle="modal" data-target="#defaultModal">

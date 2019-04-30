@@ -46,8 +46,8 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/">Add Customer</a>
-                                <a href="/">Data Customer</a>
+                                <a href="customer/create">Add Customer</a>
+                                <a href="customer">Data Customer</a>
                             </li>
                         </ul>
                     </li>
@@ -94,7 +94,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Data Parking Place
+                                Data Parking customer
                             </h2>
                         </div>
 
@@ -109,41 +109,27 @@
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Nama Place</th>
-                                            <th>Address</th>
-                                            <th>Status</th>
-                                            <th>Image</th>
                                             <th class="col-md-2">Aksi</th>
+                                            <th>Nama Customer</th>
+                                            <th>Address</th>
                                       
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($place as $row)
+                                        @foreach($customer as $row)
                                         <tr>
-                                            <td>{{$row->nama_place}}</td>
-                                            <td>{{$row->address}}</td>
                                             <td>
-                                            <?php 
-                                            if($row->status == 'Belum diverifikasi') {?>
-                                            <button class="btn btn-danger btn-sm">{{$row->status}}</button>
-                                            <?php } else if($row->status== 'Terverifikasi') {?>
-                                            <button class="btn btn-success btn-sm">{{$row->status}}</button>
-
-                                            <?php } ?>
-                                            </td>
-                                            <td>
-                                            <?php foreach (json_decode($row->img)as $gambar) { ?>									
-                                                <div class="item">
-                                                    <img style="width:250px; height:250px" src="{{ asset('/images/'.$gambar) }}">
-                                                </div>
-                                            <?php } ?>
-                                            </td>
-                                            <td>
-                                                <form action="{{ route('customer.destroy', $row->id_customer)}}" method="post">
+                                                <a href="{{ route('customer.show',$row->id_customer)}}">
+                                                    <button class="btn btn-icon btn-sm btn-warning" type="button" style="margin-top:4%">
+                                                    <i style="color:#fff" class="material-icons">person</i>
+                                                    <span>Operator</span>
+                                                    </button>
+                                                </a>
+                                                <form action="{{ route('customer.destroy', $row->id_customer)}}" method="post" style="margin-top:4%";>
                                                 @csrf
                                                 @method('DELETE')
                                                 <a onclick="return confirm('Are you sure?')">
-                                                    <button class="btn btn-icon btn-sm btn-danger" type="submit">
+                                                    <button class="btn btn-icon btn-sm btn-danger" type="submit" style="width:96px">
                                                     <i style="color:#fff" class="material-icons">delete</i>
                                                     <span>Delete</span>
                                                     </button>
@@ -151,12 +137,15 @@
                                                 </form>
                                             
                                                 <a href="{{ route('customer.edit',$row->id_customer)}}">
-                                                    <button class="btn btn-icon btn-sm btn-info" type="button" style="margin-top:4%">
+                                                    <button class="btn btn-icon btn-sm btn-info" type="button" style="margin-top:4%;width:96px">
                                                     <i style="color:#fff" class="material-icons">border_color</i>
                                                     <span>Update</span>
                                                     </button>
                                                 </a>
                                             </td>
+                                            <td>{{$row->nama_customer}}</td>
+                                            <td>{{$row->address}}</td>
+                                       
                                         </tr>
                                         @endforeach
                                        

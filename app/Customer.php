@@ -9,7 +9,7 @@ class Customer extends Model
      protected $table = "customer";
      protected $primaryKey = 'id_customer';
      protected $fillable = [
-        'id_user','nama_place', 'address', 'latitude','longitude','img','status'
+          'nama_customer', 'address','tgl_bergabung','latitude','longitude','image'
      ];
 
 }   

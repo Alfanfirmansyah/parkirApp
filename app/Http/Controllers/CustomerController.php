@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Place;
+use App\Customer;
 use DB;
 use \Auth;
 use Illuminate\Support\Facades\Session;
@@ -23,8 +23,8 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        $place= Place::all();
-        return view('admin.place.DataCustomer',compact('place'));
+        $customer= Customer::all();
+        return view('admin.customer.DataCustomer',compact('customer'));
         
     }
 
@@ -35,7 +35,9 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {        
+    {  
+        $tgl = date('l, d-m-Y');
+        return view('admin.customer.CreateCustomer',compact('tgl'));
     }
 
     /**
@@ -46,6 +48,35 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama_customer'  =>'required',
+            'address'        =>'required',
+            'latitude'       =>'required',
+            'longitude'      =>'required',
+            'filename'       =>'required',
+            'filename.*'     =>'image|mimes:jpeg,png,jpg,gif,svg|max:2048' 
+        ]);
+    
+        
+	    if($request->hasfile('filename'))
+        {
+            foreach($request->file('filename') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->move(public_path().'/images', $name);  
+                $data[] = $name;  
+            }
+        }
+		
+          $customer = new Customer([
+          'nama_customer'   => $request->get('nama_customer'),
+          'address'         => $request->get('address'),
+          'latitude'        => $request->get('latitude'),
+          'longitude'       => $request->get('longitude'),
+          'image'           => json_encode($data)
+          ]);
+          $customer->save();
+          return redirect('/customer')->with('success','Berhasil Menambah Data');
        
     }
 
@@ -57,7 +88,8 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        
+       $customer = Customer::find($id);
+        return view('admin.customer.DetailCustomer',compact('customer'));
     }
 
     /**
@@ -68,8 +100,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $place = Place::find($id);
-        return view('admin.place.EditCustomer',compact('place'));
+        $customer = Customer::find($id);
+        return view('admin.customer.EditCustomer',compact('customer'));
     }
 
     /**
@@ -81,15 +113,41 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+                'nama_customer'     =>'required',
+                'address'        =>'required',
+                'latitude'       =>'required',
+                'longitude'      =>'required',
+                
+            ]);
+                $customer = Customer::find($id);
+                $customer->nama_customer    = $request->get('nama_customer');
+                $customer->address          = $request->get('address');
+                $customer->latitude         = $request->get('latitude');
+                $customer->longitude        = $request->get('longitude');
+                $customer->save();
+                return redirect('/customer')->with('success', 'Data customer Berhasil Terupdate');                     
+    }
+
+    public function updateImg(Request $request, $id)
+    {
        $request->validate([
-            'status'     =>'required'
+            'filename'     =>'required',
         ]);
-        
-        $place = Place::find($id);
-        $place->status  = $request->get('status');
-        $place->save();
-        return redirect('/customer')->with('success', 'Data place Berhasil Terupdate');
-                                     
+                  $customer = Customer::find($id);
+                   	if($request->hasfile('filename'))
+                    {
+                        foreach($request->file('filename') as $image)
+                        {
+                            $name=$image->getClientOriginalName();
+                            $image->move(public_path().'/images', $name);  
+                            $data[] = $name;  
+                        }
+                    }
+                    $customer->image        = json_encode($data);
+                    $customer->save();
+                    return redirect('/customer/'.$id.'/edit')->with('success', 'Data customer Berhasil Terupdate');
+                     
     }
 	
     /** 
@@ -100,8 +158,8 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $place = Place::find($id);
-        $place->delete();
-        return redirect('/customer')->with('success', 'Data place Berhasil Dihapus');
+        $customer = Customer::find($id);
+        $customer->delete();
+        return redirect('/customer')->with('success', 'Data customer Berhasil Dihapus');
     }
 }
