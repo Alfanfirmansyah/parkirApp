@@ -20,7 +20,6 @@ class KategoriSeeder extends Seeder
 			'id_kategori' => '2',
         	'kendaraan' => 'Motor',
 		]
-		
 		]);
     }
 }

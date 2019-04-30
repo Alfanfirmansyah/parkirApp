@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Place;
-<<<<<<< HEAD
 use App\User;
-=======
 use App\Pricing;
->>>>>>> 477b4d50a29ae8f880f1d63c6da59c975195ecc9
 use \Auth;
 
 

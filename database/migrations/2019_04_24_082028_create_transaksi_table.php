@@ -17,12 +17,11 @@ class CreateTransaksiTable extends Migration
             $table->bigIncrements('id_transaksi');
 			$table->string('kode_qrcode',50)->unique();
 			$table->unsignedBigInteger('id_customer');
-			$table->unsignedBigInteger('id_pricing');
+			$table->double('harga');
 			$table->string('no_plat');
-			$table->string('tgl_masuk');
+			$table->timestamp('tgl_masuk')->useCurrent();
 			$table->string('tgl_keluar');
 			$table->string('status');
-			$table->unsignedBigInteger('id_user');
             $table->timestamps();
         });
     }

@@ -15,13 +15,13 @@ class CreateCustomerTable extends Migration
     {
         Schema::create('customer', function (Blueprint $table) {
             $table->bigIncrements('id_customer');
-			$table->unsignedBigInteger('id_user');
-			$table->string('nama_place');
+			$table->string('nama_customer');
 			$table->longText('address');
+			$table->timestamp('tgl_bergabung')->useCurrent();
 			$table->string('latitude');
 			$table->string('longitude');
 			$table->string('status');
-			$table->longText('img')->nullable;
+			$table->longText('image')->nullable;
             $table->timestamps();
         });
     }
