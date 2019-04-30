@@ -25,6 +25,7 @@ Route::group(['middleware' => IsAdmin::class], function () {
 	Route::resource('role','RoleController');
 	Route::resource('operator', 'OperatorController');
 	Route::resource('kategori','KategoriController');
+	Route::resource('user','UserController');
 });
 
 Route::group(['middleware' => IsOperator::class], function () {

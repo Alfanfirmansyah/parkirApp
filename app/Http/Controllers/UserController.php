@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use DB;
+use Illuminate\Support\Facades\Hash;
 use \Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -21,13 +22,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(request $request)
+    public function index()
     {
-        $user = User::when($request->keyword, function ($query) use ($request) {
-        $query->where('name', 'like', "%{$request->keyword}%");
-        })->where('id_role',2)->get();       
-        return view('admin.user.DataUser',compact('user'));
-        
+        $user= User::where('id_role',1)->get();
+        return view('admin.user.Datauser',compact('user'));
     }
 
 
@@ -37,8 +35,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        
+    {        
     }
 
     /**
@@ -49,7 +46,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-     
+        $request->validate([
+            'name'      =>'required',
+            'email'     =>'required',
+            'password'  =>'required',
+            'address'   =>'required',
+            'telp'      =>'required' 
+        ]);
+
+          $user = new User([
+          'name'    => $request->get('name'),
+          'password' => Hash::make('password'),
+          'email'   => $request->get('email'),
+          'address' => $request->get('address'),
+          'telp'    => $request->get('telp'),
+          'id_role' => 1,
+          'id_customer' =>0
+          ]);
+          $user->save();
+          return redirect('/user')->with('success','Berhasil Menambah Data');
+    
     }
 
     /**
@@ -71,7 +87,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-       
+        $user = User::find($id);
+        return view('admin.user.EditUser',compact('user'));
     }
 
     /**
@@ -83,7 +100,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $request->validate([
+            'name'      =>'required',
+            'email'     =>'required',
+            'address'   =>'required',
+            'telp'      =>'required' 
+        ]);
+   
+        $user = User::find($id);
+        $user->name     = $request->get('name');
+        $user->email    = $request->get('email');
+        $user->telp     = $request->get('telp');
+        $user->address  = $request->get('address');
+        $user->save();
+        return redirect('/user')->with('success', 'Data user Berhasil Terupdate');              
     }
 	
     /** 
