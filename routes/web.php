@@ -21,17 +21,15 @@ Route::group(['middleware' => IsAdmin::class], function () {
 	
 	Route::get('/admin', 'AdminController@index');
 	Route::resource('customer','CustomerController');
-	Route::resource('user','UserController');
+	Route::post('/updateImgParking/{id}', 'CustomerController@updateImg');
 	Route::resource('role','RoleController');
+	Route::resource('operator', 'OperatorController');
 	Route::resource('kategori','KategoriController');
 });
 
 Route::group(['middleware' => IsOperator::class], function () {
 	
-	Route::resource('operator', 'OperatorController');
 	Route::post('/UpdatePass/{id}', 'OperatorController@UpdatePass');
-	Route::resource('place','PlaceController');
-	Route::post('/updateImgParking/{id}', 'PlaceController@updateImg');
 	Route::resource('pricing','PriceController');
 	Route::resource('transaksi','TransaksiController');
 });
