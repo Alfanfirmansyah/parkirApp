@@ -30,7 +30,7 @@
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active">
-                        <a href="../../index.html">
+                        <a href="/admin">
                             <i class="material-icons">dashboard</i>
                             <span>Dashboard</span>
                         </a>

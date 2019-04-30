@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Admin | App Parkir</title>
+    @yield('title')
     <!-- Favicon-->
-    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ asset('/favicon.png') }}" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -56,15 +56,6 @@
     <div class="overlay"></div>
     <!-- #END# Overlay For Sidebars -->
     <!-- Search Bar -->
-    <div class="search-bar">
-        <div class="search-icon">
-            <i class="material-icons">search</i>
-        </div>
-        <input type="text" placeholder="START TYPING...">
-        <div class="close-search">
-            <i class="material-icons">close</i>
-        </div>
-    </div>
     <!-- #END# Search Bar -->
     <!-- Top Bar -->
     <nav class="navbar">
@@ -74,7 +65,7 @@
     <section>
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
-             @include('layouts.leftside')
+             @yield('leftside')
         </aside>
 
         <!-- Right Sidebar -->

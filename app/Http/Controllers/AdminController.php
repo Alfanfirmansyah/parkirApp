@@ -23,6 +23,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+		$tgl = date('l, d-m-Y');
+        return view('welcome',compact('tgl'));
     }
 }
