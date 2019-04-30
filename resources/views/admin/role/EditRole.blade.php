@@ -46,8 +46,8 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="/">Add Customer</a>
-                                <a href="/">Data Customer</a>
+                                 <a href="/customer/create">Add Customer</a>
+                                <a href="/customer">Data Customer</a>
                             </li>
                         </ul>
                     </li>
