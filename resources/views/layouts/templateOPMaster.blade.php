@@ -76,7 +76,7 @@
     <section>
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
-             @include('layouts.leftsideOP')
+             @yield('leftside')
         </aside>
 
         <!-- Right Sidebar -->

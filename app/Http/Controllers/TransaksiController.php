@@ -40,11 +40,10 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        $id = \Auth::user()->id;
+        $id = \Auth::user()->id_customer;
          $request->validate([
             'no_plat'     =>'required',
-            'id_price'  =>'required',
-            'tgl_masuk'   =>'required',
+            'harga'       =>'required',
         ]);
        
           $qrcode = $request->get('qrcode');
@@ -52,10 +51,9 @@ class TransaksiController extends Controller
           $Transaksi = new Transaksi([
           'kode_qrcode'     => $qrcode,
           'no_plat'         => $request->get('no_plat'),
-          'id_pricing'        => $request->get('id_price'),
-          'tgl_masuk'       => $request->get('tgl_masuk'),
-          'tgl_keluar'       =>'',
-          'id_user'         => $id,
+          'harga'     	    => $request->get('harga'),
+          'tgl_keluar'      => '',
+          'id_customer'     => $id,
           'status'          => 'masuk',
           ]);
           $Transaksi->save();
@@ -64,13 +62,9 @@ class TransaksiController extends Controller
 
           $kode = $qrcode;
           $no_plat = $request->get('no_plat');
-          $tgl_masuk = $request->get('tgl_masuk');
-          $harga = $request->get('id_price');  
-          $price= Pricing::where('id_user', '=',[$id])
-                            ->where('id_price','=',[$harga])
-                            ->get();
+          $harga = $request->get('harga');  
            
-          return view('operator.transaksi.tiket',compact('tiket','kode','no_plat','tgl_masuk','price'));
+          return view('operator.transaksi.tiket',compact('tiket','kode','no_plat','harga'));
     }   
 
     /**

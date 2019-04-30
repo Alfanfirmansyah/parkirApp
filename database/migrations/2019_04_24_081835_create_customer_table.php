@@ -20,7 +20,6 @@ class CreateCustomerTable extends Migration
 			$table->timestamp('tgl_bergabung')->useCurrent();
 			$table->string('latitude');
 			$table->string('longitude');
-			$table->string('status');
 			$table->longText('image')->nullable;
             $table->timestamps();
         });
