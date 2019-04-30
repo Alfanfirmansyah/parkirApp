@@ -58,7 +58,7 @@ class PriceController extends Controller
           'id_user'   => $request->get('id_user'),
           ]);
           $price->save();
-          return redirect('/pricing')->with('success','Berhasil Menambah Data');
+          return redirect('/customer')->with('success','Berhasil Menambah Data');
     }
 
     /**
@@ -82,7 +82,7 @@ class PriceController extends Controller
     {
         $kategori = Kategori::all();
 		$price    = Pricing::find($id);
-        return view('operator.pricing.EditPrice',compact('kategori','price'));
+        return view('admin.pricing.EditPrice',compact('kategori','price'));
     }
 
     /**
@@ -104,7 +104,7 @@ class PriceController extends Controller
         $price->id_kategori     = $request->get('id_kategori');
         $price->harga     = $request->get('harga');
         $price->save();
-        return redirect('/pricing')->with('success', 'Data kategori Berhasil Terupdate');
+        return redirect('/customer')->with('success', 'Data kategori Berhasil Terupdate');
     }
 
     /**
@@ -115,8 +115,9 @@ class PriceController extends Controller
      */
     public function destroy($id)
     {
+		
        $price = Pricing::find($id);
        $price->delete();
-       return redirect('/pricing')->with('success', 'Data kategori Berhasil Dihapus');
+       return redirect('/customer')->with('success', 'Data kategori Berhasil Dihapus');
     }
 }

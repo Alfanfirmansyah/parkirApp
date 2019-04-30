@@ -18,7 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => IsAdmin::class], function () {
-	
 	Route::get('/admin', 'AdminController@index');
 	Route::resource('customer','CustomerController');
 	Route::post('/updateImgParking/{id}', 'CustomerController@updateImg');
@@ -29,9 +28,7 @@ Route::group(['middleware' => IsAdmin::class], function () {
 });
 
 Route::group(['middleware' => IsOperator::class], function () {
-	
 	Route::post('/UpdatePass/{id}', 'OperatorController@UpdatePass');
-	Route::resource('pricing','PriceController');
 	Route::resource('transaksi','TransaksiController');
 });
 

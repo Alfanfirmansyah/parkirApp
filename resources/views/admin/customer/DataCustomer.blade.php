@@ -46,8 +46,8 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="customer/create">Add Customer</a>
-                                <a href="customer">Data Customer</a>
+                                 <a href="/customer/create">Add Customer</a>
+                                <a href="/customer">Data Customer</a>
                             </li>
                         </ul>
                     </li>
@@ -120,9 +120,15 @@
                                         <tr>
                                             <td>
                                                 <a href="{{ route('customer.show',$row->id_customer)}}">
-                                                    <button class="btn btn-icon btn-sm btn-warning" type="button" style="margin-top:4%">
-                                                    <i style="color:#fff" class="material-icons">person</i>
-                                                    <span>Operator</span>
+                                                    <button class="btn btn-icon btn-sm btn-success" type="button" style="margin-top:4%">
+                                                    <i style="color:#fff" class="material-icons">dashboard</i>
+                                                    <span>Detail</span>
+                                                    </button>
+                                                </a>
+                                                <a href="{{ route('customer.edit',$row->id_customer)}}">
+                                                    <button class="btn btn-icon btn-sm btn-info" type="button" style="margin-top:4%;width:96px">
+                                                    <i style="color:#fff" class="material-icons">border_color</i>
+                                                    <span>Update</span>
                                                     </button>
                                                 </a>
                                                 <form action="{{ route('customer.destroy', $row->id_customer)}}" method="post" style="margin-top:4%";>
@@ -136,12 +142,7 @@
                                                 </a>
                                                 </form>
                                             
-                                                <a href="{{ route('customer.edit',$row->id_customer)}}">
-                                                    <button class="btn btn-icon btn-sm btn-info" type="button" style="margin-top:4%;width:96px">
-                                                    <i style="color:#fff" class="material-icons">border_color</i>
-                                                    <span>Update</span>
-                                                    </button>
-                                                </a>
+                                               
                                             </td>
                                             <td>{{$row->nama_customer}}</td>
                                             <td>{{$row->address}}</td>

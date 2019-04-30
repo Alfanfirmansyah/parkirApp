@@ -22,7 +22,19 @@ class UsersSeed extends Seeder
         	'telp' => '080000000',
         	'id_role' => '1',
         	'id_customer' => '0'
+        ],
+		[
+        	'name' => 'Operator',
+        	'email' => 'operator@gmail.com',
+        	'email_verified_at' => '2019-03-24 15:54:07',
+        	'password' => Hash::make('password'),
+        	'foto' => 'icon.jpg',
+        	'address' => 'Mlg',
+        	'telp' => '080000000',
+        	'id_role' => '2',
+        	'id_customer' => '1'
         ]
+		
 		]);
     }
 }

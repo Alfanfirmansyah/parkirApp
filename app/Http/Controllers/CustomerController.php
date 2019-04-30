@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
+use App\Pricing;
+use App\Kategori;
 use DB;
 use \Auth;
 use Illuminate\Support\Facades\Session;
@@ -88,8 +90,10 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-       $customer = Customer::find($id);
-        return view('admin.customer.DetailCustomer',compact('customer'));
+        $customer = Customer::find($id);
+		$price= Pricing::where('id_customer', '=',[$id])->get();
+		$kategori = Kategori::all();
+        return view('admin.customer.DetailCustomer',compact('customer','price','kategori'));
     }
 
     /**
@@ -144,10 +148,9 @@ class CustomerController extends Controller
                             $data[] = $name;  
                         }
                     }
-
-                    $customer->img         = json_encode($data);
+                    $customer->image        = json_encode($data);
                     $customer->save();
-                    return redirect('/customer')->with('success', 'Data customer Berhasil Terupdate');
+                    return redirect('/customer/'.$id.'/edit')->with('success', 'Data customer Berhasil Terupdate');
                      
     }
 	
