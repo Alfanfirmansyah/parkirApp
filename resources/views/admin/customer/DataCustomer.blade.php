@@ -139,7 +139,7 @@
                                 </td>
                                 <td>{{$row->nama_customer}}</td>
                                 <td>{{$row->address}}</td>
-                                
+                                <td><img style="width:200px; height:170px" src="{{ asset('/images/'.array_first(json_decode($row->image))) }}" /></td>
                             </tr>
                             @endforeach
                         </tbody>

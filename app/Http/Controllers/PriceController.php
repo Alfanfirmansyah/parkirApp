@@ -59,7 +59,7 @@ class PriceController extends Controller
           'id_customer'   => $request->get('id_customer'),
           ]);
           $price->save();
-          return redirect('/customer/.$key')->with('success','Berhasil Menambah Data');
+          return redirect('/customer/'.$key)->with('success','Berhasil Menambah Data');
     }
 
     /**
@@ -102,10 +102,11 @@ class PriceController extends Controller
         ]);
    
         $price = Pricing::find($id);
+        $key = $price->id_customer;
         $price->id_kategori     = $request->get('id_kategori');
         $price->harga     = $request->get('harga');
         $price->save();
-        return redirect('/customer')->with('success', 'Data kategori Berhasil Terupdate');
+        return redirect('/customer/'.$key)->with('success', 'Data kategori Berhasil Terupdate');
     }
 
     /**
@@ -118,7 +119,8 @@ class PriceController extends Controller
     {
 		
        $price = Pricing::find($id);
+       $key = $price->id_customer;
        $price->delete();
-       return redirect('/customer')->with('success', 'Data kategori Berhasil Dihapus');
+       return redirect('/customer/'.$key)->with('success', 'Data kategori Berhasil Dihapus');
     }
 }

@@ -56,7 +56,8 @@ class UserOPController extends Controller
 
         $imageName = time().'.'.$request->foto->getClientOriginalExtension();
         $request->foto->move(public_path('images'), $imageName);
-        
+
+        $key = $request->get('id_customer');
         $user = new User([
           'name'    => $request->get('name'),
           'password' => Hash::make($request->get('password')),
@@ -68,7 +69,7 @@ class UserOPController extends Controller
           'id_customer' => $request->get('id_customer')
           ]);
           $user->save();
-          return redirect('/customer')->with('success2','Berhasil Menambah Data');
+          return redirect('/customer/'.$key)->with('success2','Berhasil Menambah Data');
     
     }
 
@@ -92,6 +93,7 @@ class UserOPController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+       
         return view('admin.userop.EditOperator',compact('user'));
     }
 
@@ -112,9 +114,9 @@ class UserOPController extends Controller
             'telp'      =>'required' 
         ]);
         
-        
-        
         $user = User::find($id);
+        $key = $user->id_customer;
+
         if(empty($request->foto)){
             $user = User::find($id);
             $user->name     = $request->get('name');
@@ -135,7 +137,7 @@ class UserOPController extends Controller
             $user->foto     = $imageName;
             $user->save();
         }
-        return redirect('/customer')->with('success2', 'Data user Berhasil Terupdate');           
+        return redirect('/customer/'.$key)->with('success2', 'Data user Berhasil Terupdate');           
     }
 	
     /** 
@@ -147,7 +149,8 @@ class UserOPController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+        $key = $user->id_customer;
         $user->delete();
-        return redirect('/customer')->with('success', 'Data user Berhasil Dihapus');
+        return redirect('/customer/'.$key)->with('success', 'Data user Berhasil Dihapus');
     }
 }
