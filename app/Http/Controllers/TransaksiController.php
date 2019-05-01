@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Place;
 use App\Pricing;
 use App\Transaksi;
+use App\Customer;
 use DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use \Auth;
@@ -47,7 +48,10 @@ class TransaksiController extends Controller
         ]);
        
           $qrcode = $request->get('qrcode');
-        
+          $customer = Customer::where('id_customer', auth()->user()->id_customer )
+          ->select('nama_customer')
+          ->get();
+
           $Transaksi = new Transaksi([
           'kode_qrcode'     => $qrcode,
           'no_plat'         => $request->get('no_plat'),
@@ -58,13 +62,13 @@ class TransaksiController extends Controller
           ]);
           $Transaksi->save();
 
-          $tiket = QrCode::size(500)->generate($qrcode);
+          $trs = Transaksi::where('kode_qrcode', $qrcode )
+          ->select('tgl_masuk','no_plat','harga','kode_qrcode')
+          ->get();
 
-          $kode = $qrcode;
-          $no_plat = $request->get('no_plat');
-          $harga = $request->get('harga');  
+          $tiket = QrCode::size(220)->generate($qrcode);
            
-          return view('operator.transaksi.tiket',compact('tiket','kode','no_plat','harga'));
+          return view('operator.transaksi.tiket',compact('tiket','trs','customer'));
     }   
 
     /**

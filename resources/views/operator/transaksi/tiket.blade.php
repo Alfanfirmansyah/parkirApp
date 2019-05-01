@@ -84,22 +84,55 @@
                                         {{ session()->get('success') }}  
                                     </div><br />
                                     @endif
-							
-				
-                <!-- With Captions -->
-                <div class="col-lg-12">
-                        <div class="body">
-						<div class="col-md-2">
-						{!! $tiket !!}
-                      
+                <div class="col-lg-12 col-md-12">
+                    <div class="card">
+                        <div class="header bg-cyan">
+                            <h2>
+                            <i class="material-icons">local_parking</i>@foreach($customer as $cs ) {{ $cs->nama_customer }} @endforeach<small>Ticket Parking</small>
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <i class="material-icons">print</i>
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
-						<div class="col-md-8">
-						 kode transaksi {{ $kode }}<br>
-                       no plat {{ $no_plat }} <br>
-                       tgl masuk  <br>
-                       harga {{ $harga }}
-						</div>
-						</div>
+                        <div class="body">
+                        <div class="table-responsive">
+                         <div class="col-md-3">
+                            {!! $tiket !!}
+                         </div> 
+                         <div class="col-md-2">
+                         <br> 
+                           <h5> Kode Parking <br><br>
+                            No Plat <br><br>
+                            Tgl Masuk    <br><br>
+                            Harga <br><br>
+                            </h5>
+                         </div>
+                         <div class="col-md-6">
+                         <br> 
+                         <h5>
+                            @foreach ($trs as $tr)
+                                {{$tr->kode_qrcode}} <br><br>
+                                {{$tr->no_plat}} <br><br>
+                                {{$tr->tgl_masuk}} <br><br>
+                               Rp.{{number_format($tr->harga,0)}} <br><br>
+                            @endforeach
+                        </h5>
+                         </div> 
+                         <div class="col-md-9">
+                         Harap simpan bukti parkir ini, Terimakasih
+                        </div> 
+                        </div>
+                        </div>
+                    </div>
                 </div>
           
                            </div>
