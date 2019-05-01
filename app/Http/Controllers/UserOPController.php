@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 
 
 
-class UserController extends Controller
+class UserOPController extends Controller
 {
     public function __construct()
     {
@@ -24,8 +24,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user= User::where('id_role',1)->get();
-        return view('admin.user.Datauser',compact('user'));
     }
 
 
@@ -51,24 +49,26 @@ class UserController extends Controller
             'email'     =>'required',
             'password'  =>'required',
             'address'   =>'required',
-            'telp'      =>'required' 
+            'telp'      =>'required',
+            'foto'      =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+
         ]);
 
-         $imageName = time().'.'.$request->foto->getClientOriginalExtension();
-         $request->foto->move(public_path('images'), $imageName);
-
-          $user = new User([
+        $imageName = time().'.'.$request->foto->getClientOriginalExtension();
+        $request->foto->move(public_path('images'), $imageName);
+        
+        $user = new User([
           'name'    => $request->get('name'),
           'password' => Hash::make($request->get('password')),
           'email'   => $request->get('email'),
           'address' => $request->get('address'),
           'telp'    => $request->get('telp'),
           'foto'    => $imageName,
-          'id_role' => 1,
-          'id_customer' =>0
+          'id_role' => 2,
+          'id_customer' => $request->get('id_customer')
           ]);
           $user->save();
-          return redirect('/admin')->with('success','Berhasil Menambah Data');
+          return redirect('/customer')->with('success2','Berhasil Menambah Data');
     
     }
 
@@ -92,7 +92,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('admin.user.EditUser',compact('user'));
+        return view('admin.userop.EditOperator',compact('user'));
     }
 
     /**
@@ -111,7 +111,10 @@ class UserController extends Controller
             'address'   =>'required',
             'telp'      =>'required' 
         ]);
-       
+        
+        
+        
+        $user = User::find($id);
         if(empty($request->foto)){
             $user = User::find($id);
             $user->name     = $request->get('name');
@@ -132,7 +135,7 @@ class UserController extends Controller
             $user->foto     = $imageName;
             $user->save();
         }
-        return redirect('/user')->with('success', 'Data user Berhasil Terupdate');              
+        return redirect('/customer')->with('success2', 'Data user Berhasil Terupdate');           
     }
 	
     /** 
@@ -145,6 +148,6 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        return redirect('/user')->with('success', 'Data user Berhasil Dihapus');
+        return redirect('/customer')->with('success', 'Data user Berhasil Dihapus');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
+use App\User;
 use App\Pricing;
 use App\Kategori;
 use DB;
@@ -90,10 +91,11 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $customer = Customer::find($id);
-		$price= Pricing::where('id_customer', '=',[$id])->get();
-		$kategori = Kategori::all();
-        return view('admin.customer.DetailCustomer',compact('customer','price','kategori'));
+        $customer   = Customer::find($id);
+		$price      = Pricing::where('id_customer', '=',[$id])->get();
+		$userop     = User::where('id_role',2)->get();
+		$kategori   = Kategori::all();
+        return view('admin.customer.DetailCustomer',compact('customer','price','kategori','userop'));
     }
 
     /**

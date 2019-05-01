@@ -100,7 +100,7 @@
                 </h2>
             </div>
             <div class="body">
-                <form method="post" action="{{ route('user.update',$user->id) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('userop.update',$user->id) }}" enctype="multipart/form-data">
                     @method('PATCH')
                     @csrf
                     @if ($errors->any())
@@ -140,7 +140,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="Submit" class="btn btn-info waves-effect" data-toggle="modal" data-target="#defaultModal">
+                        <div class="form-line">
+                            <input type="file" class="form-control" value="{{$user->foto}}" name="foto" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="Submit" class="btn btn-info waves-effect" >
                         <i style="color:#fff" class="material-icons">save</i>
                         <span>UPDATE</span>
                         </button>

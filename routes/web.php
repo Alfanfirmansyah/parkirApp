@@ -22,14 +22,17 @@ Route::group(['middleware' => IsAdmin::class], function () {
 	Route::resource('customer','CustomerController');
 	Route::post('/updateImgParking/{id}', 'CustomerController@updateImg');
 	Route::resource('role','RoleController');
-	Route::resource('operator', 'OperatorController');
+	Route::resource('pricing','PriceController');
 	Route::resource('kategori','KategoriController');
 	Route::resource('user','UserController');
+	Route::resource('userop','UserOPController');
 });
 
 Route::group(['middleware' => IsOperator::class], function () {
 	Route::post('/UpdatePass/{id}', 'OperatorController@UpdatePass');
 	Route::resource('transaksi','TransaksiController');
+	Route::resource('operator', 'OperatorController');
+
 });
 
 

@@ -47,18 +47,19 @@ class PriceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_kategori'         =>'required',
+            'id_kategori'   =>'required',
             'harga'         =>'required'
  
         ]);
         
+        $key = $request->get('id_customer');
           $price = new Pricing([
           'id_kategori'   => $request->get('id_kategori'),
-          'harga'   => $request->get('harga'),
-          'id_user'   => $request->get('id_user'),
+          'harga'         => $request->get('harga'),
+          'id_customer'   => $request->get('id_customer'),
           ]);
           $price->save();
-          return redirect('/customer')->with('success','Berhasil Menambah Data');
+          return redirect('/customer/.$key')->with('success','Berhasil Menambah Data');
     }
 
     /**
