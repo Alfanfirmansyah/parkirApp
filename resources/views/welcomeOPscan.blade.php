@@ -36,22 +36,15 @@
                     <li class="active">
                         <a href="{{ url('operator')}}">
                             <i class="material-icons">dashboard</i>
-                            <span>Dashboard</span>
+                            <span>Parking</span>
                         </a>
                     </li>
 					<li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">receipt</i>
-                            <span>Laporan Parking</span>
+                        <a href="{{ url('transaksi')}}">
+                            <i class="material-icons">subject</i>
+                            <span>Manage Data Parkir</span>
                         </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="/transaksi">Data Parking</a>
-                                <a href="/cetak">Print Daily Parking</a>
-                            </li>
-                        </ul>
                     </li>
-                   
                 </ul>
             </div>
             <!-- #Menu -->

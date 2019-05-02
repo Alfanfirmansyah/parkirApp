@@ -17,6 +17,7 @@ class CreateTransaksiTable extends Migration
             $table->bigIncrements('id_transaksi');
 			$table->string('kode_qrcode',50)->unique();
 			$table->unsignedBigInteger('id_customer');
+			$table->integer('id_kategori');
 			$table->double('harga');
 			$table->string('no_plat');
 			$table->timestamp('tgl_masuk')->useCurrent();

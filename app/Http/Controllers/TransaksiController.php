@@ -20,7 +20,10 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        //
+        $transaksi  = Transaksi::with('get_kategori')->where('status','masuk')->get();
+        $keluar     = Transaksi::with('get_kategori')->where('status','keluar')->get();
+        return view('operator.transaksi.DataTransaksi',compact('transaksi','keluar'));
+        
     }
 
     /**
@@ -86,9 +89,6 @@ class TransaksiController extends Controller
              $transaksi->save();
              return redirect('/operator')->with('success', 'Success Checkout parking'); 
         }
-
-        
-
       
     }
     /**
@@ -133,6 +133,8 @@ class TransaksiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $transaksi = transaksi::find($id);
+        $transaksi->delete();
+        return redirect('/transaksi')->with('success', 'Data transaksi Berhasil Dihapus');
     }
 }
