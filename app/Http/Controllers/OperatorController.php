@@ -50,7 +50,6 @@ class OperatorController extends Controller
         $operator = User::find($id);
         return view('operator.profile.DataProfile',compact('operator'));
     }
-
     public function update(Request $request, $id)
     {
         $request->validate([

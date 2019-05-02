@@ -73,11 +73,9 @@
     @section('content')
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
-            <div class="block-header">
-                <h2>Home</h2>
-            </div>
+
 				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <div class="info-box bg-indigo hover-expand-effect">
+                    <div class="info-box bg-indigo">
                         <div class="icon">
                             <i class="material-icons">event</i>
                         </div>
@@ -88,7 +86,7 @@
                     </div>
                 </div>
 				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    <div class="info-box bg-red hover-expand-effect">
+                    <div class="info-box bg-red">
                         <div class="icon">
                             <i class="material-icons">local_parking</i>
                         </div>
@@ -105,6 +103,19 @@
             <div class="row clearfix">
 			
 			<div class="col-lg-12">
+                                   @if(session()->get('success'))
+                                    <div class="alert alert-success alert-close alert-dismissible" role="alert">
+                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                {{ session()->get('success') }}  
+                                  
+                                      
+                                    </div><br />
+                                    @elseif(session()->get('danger'))
+                                    <div class="alert alert-danger alert-close alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        {{ session()->get('danger') }}  
+                                    </div><br />
+                                    @endif
 					<div class="col-md-6">
                     <div class="card">
                         <div class="header">
@@ -113,14 +124,22 @@
                             </h2>
                         </div>
                         <div class="body">
+                        <form method="post" action="/checkout_parking" enctype="multipart/form-data">
+                          @csrf
 							<b>Device has camera: </b>
 									<span id="cam-has-camera"></span>
 									<br>
 									<video style="width:100%;" muted playsinline id="qr-video"></video>
 								
 								<b>Detected QR code: </b>
-								<span id="cam-qr-result">None</span>
-							
+                                <textarea class="btn btn-primary btn-sm" id="cam-qr-result" required="required" name="qrcode" required style="border:none;height:24px; outline:none; resize:none; overflow:hidden;"></textarea>
+								<div class="form-group">
+								<button type="Submit" class="btn btn-danger">
+									<i style="color:#fff" class="material-icons">airplay</i>
+									<span>Check Out</span>
+								</button>
+							    </div>  
+						</form>
 											
 						</div>
 						</div>

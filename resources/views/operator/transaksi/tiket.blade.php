@@ -108,7 +108,7 @@
                          <div class="col-md-3">
                             {!! $tiket !!}
                          </div> 
-                         <div class="col-md-2">
+                         <div style="margin-left:25px; margin-top:20px" class="col-md-2">
                          <br> 
                            <h5> Kode Parking <br><br>
                             No Plat <br><br>
@@ -116,7 +116,7 @@
                             Harga <br><br>
                             </h5>
                          </div>
-                         <div class="col-md-6">
+                         <div style="margin-top:20px;" class="col-md-6">
                          <br> 
                          <h5>
                             @foreach ($trs as $tr)
@@ -127,14 +127,19 @@
                             @endforeach
                         </h5>
                          </div> 
-                         <div class="col-md-9">
+                         <div style="margin-left:25px;" class="col-md-8">
                          Harap simpan bukti parkir ini, Terimakasih
                         </div> 
                         </div>
                         </div>
+                       
                     </div>
                 </div>
-          
+                <a href="/operator">
+                <button class="btn btn-icon btn-sm btn-danger" type="submit" style="width:96px; float:right">
+                                        <i style="color:#fff" class="material-icons">check_circle</i>
+                                        <span>Selesai</span>
+                                        </button></a>
                            </div>
                     </div>
                 </div>

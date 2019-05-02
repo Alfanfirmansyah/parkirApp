@@ -31,6 +31,7 @@ Route::group(['middleware' => IsAdmin::class], function () {
 Route::group(['middleware' => IsOperator::class], function () {
 	Route::post('/UpdatePass/{id}', 'OperatorController@UpdatePass');
 	Route::resource('transaksi','TransaksiController');
+	Route::post('/checkout_parking','TransaksiController@checkout');
 	Route::resource('operator', 'OperatorController');
 
 });

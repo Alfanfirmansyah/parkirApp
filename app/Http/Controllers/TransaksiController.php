@@ -66,11 +66,31 @@ class TransaksiController extends Controller
           ->select('tgl_masuk','no_plat','harga','kode_qrcode')
           ->get();
 
-          $tiket = QrCode::size(220)->generate($qrcode);
+          $tiket = QrCode::size(250)->generate($qrcode);
            
           return view('operator.transaksi.tiket',compact('tiket','trs','customer'));
-    }   
+    }  
 
+    public function checkout(Request $request){
+        $kode = $request->get('qrcode');
+
+        $transaksi = Transaksi::where('kode_qrcode', $kode)->first();
+
+        if(empty($transaksi)){
+
+             return redirect('/operator')->with('danger', 'Gagal melakukan proses, kode parkir tidak tersedia'); 
+
+        }else{
+             $transaksi->status = 'keluar';
+             $transaksi->tgl_keluar = date('Y-m-d h:i:s');
+             $transaksi->save();
+             return redirect('/operator')->with('success', 'Success Checkout parking'); 
+        }
+
+        
+
+      
+    }
     /**
      * Display the specified resource.
      *
