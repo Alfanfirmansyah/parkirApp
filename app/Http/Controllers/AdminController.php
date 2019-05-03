@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Customer;
+use App\User;
+use App\Transaksi;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -23,7 +25,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-		$tgl = date('l, d-m-Y');
-        return view('welcome',compact('tgl'));
+        $tgl = date('l, d-m-Y');
+        $customer   = Customer::count();
+        $keluar     = Transaksi::where('status','keluar')->count();
+        $user       = User::where('id_role','2')->count();
+        return view('welcome',compact('tgl','customer','user','keluar'));
     }
 }
