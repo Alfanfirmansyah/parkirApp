@@ -47,7 +47,7 @@ class TransaksiController extends Controller
         $id = \Auth::user()->id_customer;
          $request->validate([
             'no_plat'     =>'required',
-            'harga'       =>'required',
+            'kat'       =>'required',
         ]);
        
           $qrcode = $request->get('qrcode');
@@ -58,7 +58,8 @@ class TransaksiController extends Controller
           $Transaksi = new Transaksi([
           'kode_qrcode'     => $qrcode,
           'no_plat'         => $request->get('no_plat'),
-          'harga'     	    => $request->get('harga'),
+          'id_kategori'     => substr($request->get('kat'),0,1),
+          'harga'     	    => substr($request->get('kat'),3,5),
           'tgl_keluar'      => '',
           'id_customer'     => $id,
           'status'          => 'masuk',
@@ -91,6 +92,12 @@ class TransaksiController extends Controller
         }
       
     }
+
+    public function getHarga($id) 
+	{        
+        $harga = DB::table("pricing")->where("id_price",$id)->pluck("harga","harga");
+        return json_encode($harga);
+	}
     /**
      * Display the specified resource.
      *

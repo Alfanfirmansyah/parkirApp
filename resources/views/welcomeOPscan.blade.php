@@ -1,5 +1,6 @@
 
     @extends('layouts.templateOPMaster')
+  
 	@section('leftside')
 	  <!-- Left Sidebar -->
             <!-- User Info -->
@@ -64,9 +65,6 @@
 	@endsection
 	
     @section('content')
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-
-
 				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div class="info-box bg-indigo">
                         <div class="icon">
@@ -173,14 +171,43 @@
 											<span class="input-group-addon">
                                                 <i class="material-icons">category</i>
                                             </span>
-                                         	<select class="form-control show-tick" required name="harga">
+                                         	<select class="form-control show-tick" required name="kat" id="kat">
 											<option value="">- Select Jenis Kendaraan- </option>
 												@foreach($price as $row)
-												<option value="{{ $row->harga }}">{{ $row->kendaraan }}</option>
+												<option value="{{ $row->id_kategori }} - {{ $row->harga }}">{{ $row->kendaraan }}</option>
 												@endforeach
 											</select>
+                                           
                                         </div>
-							
+                                
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
+<!--<script type="text/javascript">
+    jQuery(document).ready(function ()
+    {
+            jQuery('select[name="kat"]').on('change',function(){
+               var katID = jQuery(this).val();
+               if(katID)
+               {
+                  jQuery.ajax({
+                     url : '/operator/getHarga/' +katID,
+                     type : "GET",
+                     dataType : "json",
+                     success:function(data)
+                     {
+                        console.log(data);
+                        jQuery.each(data, function(key,value){
+                           $('select[name="parking"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+                     }
+                  });
+               }
+               else
+               {
+                  $('select[name="parking"]').empty();
+               }
+            });
+    });
+</script> -->
 								<div class="input-group">
 								 <span class="input-group-addon">
 								 <i class="material-icons">date_range</i>
@@ -206,6 +233,7 @@
 					</div>
                 </div>
             </div>
+           
 		
 			
 								<script type="module">
@@ -250,4 +278,7 @@
 									});
 
 								</script>	
+
+
+
         @endsection
