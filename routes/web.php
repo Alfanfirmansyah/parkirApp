@@ -12,9 +12,7 @@ use App\http\middleware\IsOperator;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', 'HomeController@index');
 Auth::routes();
 
 Route::group(['middleware' => IsAdmin::class], function () {
