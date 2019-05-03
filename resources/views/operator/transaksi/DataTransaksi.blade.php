@@ -36,7 +36,7 @@
         <li>
             <a href="{{ url('operator')}}">
             <i class="material-icons">dashboard</i>
-            <span>Parking</span>
+            <span>Manage Parking</span>
             </a>
         </li>
         <li class="active">
