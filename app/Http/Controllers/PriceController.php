@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Pricing;
-use App\Kategori;
+use App\Models\Pricing;
+use App\Models\Kategori;
 use DB;
 use \Auth;
 use Illuminate\Support\Facades\Session;
@@ -24,8 +24,8 @@ class PriceController extends Controller
     {
 		$id = \Auth::user()->id;
         $kategori= Kategori::all();
-        $price= Pricing::where('id_user', '=',[$id])->get();
-        return view('operator.pricing.DataPrice',compact('kategori','price'));
+        $price= Pricing::where('user_id', '=',[$id])->get();
+        return view('operator.pricing.data_price',compact('kategori','price'));
     }
 
     /**
@@ -47,18 +47,18 @@ class PriceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_kategori'   =>'required',
+            'kategori_id'   =>'required',
             'harga'         =>'required'
  
         ]);
         
-        $key = $request->get('id_customer');
+        $key = $request->get('customer_id');
           $price = new Pricing([
-          'id_kategori'   => $request->get('id_kategori'),
+          'kategori_id'   => $request->get('kategori_id'),
           'harga'         => $request->get('harga'),
-          'id_customer'   => $request->get('id_customer'),
+          'customer_id'   => $request->get('customer_id'),
           ]);
-          $price->save();
+          $price->save();          
           return redirect('/customer/'.$key)->with('success','Berhasil Menambah Data');
     }
 
@@ -83,7 +83,7 @@ class PriceController extends Controller
     {
         $kategori = Kategori::all();
 		$price    = Pricing::find($id);
-        return view('admin.pricing.EditPrice',compact('kategori','price'));
+        return view('admin.pricing.edit_price',compact('kategori','price'));
     }
 
     /**
@@ -96,15 +96,15 @@ class PriceController extends Controller
     public function update(Request $request, $id)
     {
           $request->validate([
-            'id_kategori'         =>'required',
+            'kategori_id'   =>'required',
             'harga'         =>'required'
  
         ]);
    
         $price = Pricing::find($id);
-        $key = $price->id_customer;
-        $price->id_kategori     = $request->get('id_kategori');
-        $price->harga     = $request->get('harga');
+        $key = $price->customer_id;
+        $price->kategori_id = $request->get('kategori_id');
+        $price->harga       = $request->get('harga');
         $price->save();
         return redirect('/customer/'.$key)->with('success', 'Data kategori Berhasil Terupdate');
     }
@@ -119,7 +119,7 @@ class PriceController extends Controller
     {
 		
        $price = Pricing::find($id);
-       $key = $price->id_customer;
+       $key = $price->customer_id;
        $price->delete();
        return redirect('/customer/'.$key)->with('success', 'Data kategori Berhasil Dihapus');
     }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\User;
+use App\Models\User;
 use DB;
 use Illuminate\Support\Facades\Hash;
 use \Auth;
@@ -25,7 +25,7 @@ class UserController extends Controller
     public function index()
     {
         $user= User::where('role_id',1)->get();
-        return view('admin.user.datauser',compact('user'));
+        return view('admin.user.data_user',compact('user'));
     }
 
 
@@ -92,7 +92,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('admin.user.editUser',compact('user'));
+        return view('admin.user.edit_user',compact('user'));
     }
 
     /**

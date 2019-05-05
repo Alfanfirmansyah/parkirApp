@@ -14,7 +14,7 @@ class CreateLaporanTable extends Migration
     public function up()
     {
         Schema::create('laporan', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('laporan_id');
 			$table->unsignedBigInteger('customer_id');
 			$table->string('tgl');
 			$table->double('total_pendapatan');

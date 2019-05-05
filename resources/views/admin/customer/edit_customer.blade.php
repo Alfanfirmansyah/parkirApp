@@ -71,7 +71,7 @@
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane fade in active" id="profile_settings">
-                        <form method="post" action="{{ route('customer.update',$customer->id_customer) }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('customer.update',$customer->customer_id) }}" enctype="multipart/form-data">
                             @method('PATCH')
                             @csrf
                             @if ($errors->any())
@@ -94,7 +94,7 @@
                                                 <i class="material-icons">person_pin_circle</i>
                                                 </span>
                                                 <div class="form-line">
-                                                    <input type="text" name="nama_customer" class="form-control" value="{{$customer->nama_customer}}">
+                                                    <input type="text" name="name" class="form-control" value="{{$customer->name}}">
                                                 </div>
                                             </div>
                                             <div class="col s12">
@@ -128,12 +128,12 @@
                                 <div class="media">
                                     <div class="media-body">
                                         <div class="col-md-6">
-                                            <div id="carousel-example-generic_{{$customer->id_customer}}" class="carousel slide" data-ride="carousel">
+                                            <div id="carousel-example-generic_{{$customer->customer_id}}" class="carousel slide" data-ride="carousel">
                                                 <!-- Indicators -->
                                                 <ol class="carousel-indicators">
                                                     <?php $a = 0 ?>
                                                     <?php foreach (json_decode($customer->image)as $gambar) { ?>
-                                                    <li data-target="#carousel-example-generic_{{$customer->id_customer}}" data-slide-to="$a++" class=""></li>
+                                                    <li data-target="#carousel-example-generic_{{$customer->customer_id}}" data-slide-to="$a++" class=""></li>
                                                     <?php } ?>
                                                 </ol>
                                                 <!-- Wrapper for slides -->
@@ -148,18 +148,18 @@
                                                     <?php } ?>
                                                 </div>
                                                 <!-- Controls -->
-                                                <a class="left carousel-control" href="#carousel-example-generic_{{$customer->id_customer}}" role="button" data-slide="prev">
+                                                <a class="left carousel-control" href="#carousel-example-generic_{{$customer->customer_id}}" role="button" data-slide="prev">
                                                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                                                 <span class="sr-only">Previous</span>
                                                 </a>
-                                                <a class="right carousel-control" href="#carousel-example-generic_{{$customer->id_customer}}" role="button" data-slide="next">
+                                                <a class="right carousel-control" href="#carousel-example-generic_{{$customer->customer_id}}" role="button" data-slide="next">
                                                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                                 <span class="sr-only">Next</span>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <form method="post" action="/updateImgParking/{{ $customer->id_customer }}" enctype="multipart/form-data">
+                                            <form method="post" action="/updateImgParking/{{ $customer->customer_id }}" enctype="multipart/form-data">
                                                 @csrf
                                                 <i class="fa fa-image"></i> Foto Parking
                                                 <div class="input-group control-group increment" >

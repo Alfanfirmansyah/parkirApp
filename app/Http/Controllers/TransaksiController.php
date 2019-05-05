@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Pricing;
-use App\Model\Transaksi;
-use App\Model\Customer;
+use App\Models\Pricing;
+use App\Models\Transaksi;
+use App\Models\Customer;
 use DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use \Auth;
@@ -19,9 +19,12 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        $transaksi  = Transaksi::with('get_kategori')->where('status','masuk')->get();
-        $keluar     = Transaksi::with('get_kategori')->where('status','keluar')->get();
-        return view('operator.transaksi.dataTransaksi',compact('transaksi','keluar'));
+        $id = \Auth::user()->customer_id;
+        $transaksi  = Transaksi::with('get_kategori')->where('status','masuk')
+                    ->where('customer_id',$id)->get();
+        $keluar     = Transaksi::with('get_kategori')->where('status','keluar')
+                    ->where('customer_id',$id)->get();
+        return view('operator.transaksi.data_transaksi',compact('transaksi','keluar'));
         
     }
 
@@ -43,10 +46,10 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        $id = \Auth::user()->id_customer;
+        $id = \Auth::user()->customer_id;
          $request->validate([
             'no_plat'     =>'required',
-            'kat'         =>'required',
+            'kategori'    =>'required',
         ]);
        
           $qrcode = $request->get('qrcode');
@@ -55,8 +58,8 @@ class TransaksiController extends Controller
           $Transaksi = new Transaksi([
           'kode_qrcode'     => $qrcode,
           'no_plat'         => $request->get('no_plat'),
-          'kategori_id'     => substr($request->get('kat'),0,1),
-          'harga'     	    => substr($request->get('kat'),3,5),
+          'kategori_id'     => substr($request->get('kategori'),0,1),
+          'harga'     	    => substr($request->get('kategori'),3,5),
           'tgl_keluar'      => '',
           'customer_id'     => $id,
           'status'          => 'masuk',

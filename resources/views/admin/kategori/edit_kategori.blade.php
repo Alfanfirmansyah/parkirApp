@@ -63,7 +63,7 @@
                 </h2>
             </div>
             <div class="body">
-                <form method="post" action="{{ route('kategori.update',$kategori->id_kategori) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('kategori.update',$kategori->kategori_id) }}" enctype="multipart/form-data">
                     @method('PATCH')
                     @csrf
                     @if ($errors->any())

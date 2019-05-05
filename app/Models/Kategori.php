@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Kategori extends Model
 {
      protected $table = "kategori";
-     protected $primaryKey = 'id';
-     protected $fillable = [
+     protected $primaryKey = 'kategori_id';
+	 protected $fillable = [
         'kendaraan'
-    ];
-	
-	
-	
-	
-}   
+     ];
+	 
+
+}

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Customer;
-use App\Model\User;
-use App\Model\Pricing;
-use App\Model\Kategori;
-use DB;
+use App\Models\Customer;
+use App\Models\User;
+use App\Models\Pricing;
+use App\Models\Kategori;
 use \Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -28,7 +27,7 @@ class CustomerController extends Controller
     public function index()
     {
         $customer= Customer::all();
-        return view('admin.customer.dataCustomer',compact('customer'));
+        return view('admin.customer.data_customer',compact('customer'));
     }
     /**
      * Show the form for creating a new resource.
@@ -38,7 +37,7 @@ class CustomerController extends Controller
     public function create()
     {  
         $tgl = date('l, d-m-Y');
-        return view('admin.customer.createCustomer',compact('tgl'));
+        return view('admin.customer.create_customer',compact('tgl'));
     }
 
     /**
@@ -91,9 +90,9 @@ class CustomerController extends Controller
     {
         $customer   = Customer::find($id);
 		$price      = Pricing::where('customer_id', '=',[$id])->get();
-		$userop     = User::where('role_id',2)->get();
+		$userop     = User::where('role_id',2)->where('customer_id',$id)->get();
 		$kategori   = Kategori::all();
-        return view('admin.customer.detailCustomer',compact('customer','price','kategori','userop'));
+        return view('admin.customer.detail_customer',compact('customer','price','kategori','userop'));
     }
 
     /**
@@ -105,7 +104,7 @@ class CustomerController extends Controller
     public function edit($id)
     {
         $customer = Customer::find($id);
-        return view('admin.customer.editCustomer',compact('customer'));
+        return view('admin.customer.edit_customer',compact('customer'));
     }
 
     /**
@@ -132,7 +131,6 @@ class CustomerController extends Controller
                 $customer->save();
                 return redirect('/customer')->with('success', 'Data customer Berhasil Terupdate');                     
     }
-
     public function updateImg(Request $request, $id)
     {
        $request->validate([
@@ -150,10 +148,8 @@ class CustomerController extends Controller
                     }
                     $customer->image        = json_encode($data);
                     $customer->save();
-                    return redirect('/customer/'.$id.'/edit')->with('success', 'Data customer Berhasil Terupdate');
-                     
+                    return redirect('/customer/'.$id.'/edit')->with('success', 'Data customer Berhasil Terupdate');                
     }
-	
     /** 
      * Remove the specified resou   rce from storage.
      *

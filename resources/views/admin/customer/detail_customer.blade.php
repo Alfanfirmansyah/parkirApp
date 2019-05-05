@@ -67,7 +67,7 @@
                 <div class="row clearfix">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="col-md-6">
-                            <div id="carousel-example-generic_{{$customer->id_customer}}" class="carousel slide" data-ride="carousel">
+                            <div id="carousel-example-generic_{{$customer->customer_id}}" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
                                 <ol class="carousel-indicators">
                                     <?php $a = 0 ?>
@@ -87,11 +87,11 @@
                                     <?php } ?>
                                 </div>
                                 <!-- Controls -->
-                                <a class="left carousel-control" href="#carousel-example-generic_{{$customer->id_customer}}" role="button" data-slide="prev">
+                                <a class="left carousel-control" href="#carousel-example-generic_{{$customer->customer_id}}" role="button" data-slide="prev">
                                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                                 </a>
-                                <a class="right carousel-control" href="#carousel-example-generic_{{$customer->id_customer}}" role="button" data-slide="next">
+                                <a class="right carousel-control" href="#carousel-example-generic_{{$customer->customer_id}}" role="button" data-slide="next">
                                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                                 </a>
@@ -123,7 +123,7 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    <i class="material-icons">money</i>   Pricing   {{$customer->nama_customer}}
+                    <i class="material-icons">money</i>   Pricing   {{$customer->name}}
                 </h2>
                 <ul class="header-dropdown m-r--5" style="margin-top:-1%">
                     <button type="button" class="btn btn-info waves-effect" data-toggle="modal" data-target="#defaultModal">
@@ -159,10 +159,10 @@
                                     <span class="input-group-addon">
                                     <i class="material-icons">category</i>
                                     </span>
-                                    <select class="form-control show-tick" required name="id_kategori">
+                                    <select class="form-control show-tick" required name="kategori_id">
                                         <option value="">- Select Jenis Kategori- </option>
                                         @foreach($kategori as $row)
-                                        <option value="{{ $row->id_kategori }}">{{ $row->kendaraan }}</option>
+                                        <option value="{{ $row->kategori_id }}">{{ $row->kendaraan }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -172,7 +172,7 @@
                                     </span>
                                     <div class="form-line">
                                         <input type="number" name="harga" class="form-control" placeholder="Harga">
-                                        <input type="hidden" name="id_customer" value="{{ $customer->id_customer }}">
+                                        <input type="hidden" name="customer_id" value="{{ $customer->customer_id }}">
                                     </div>
                                 </div>
                         </div>
@@ -240,7 +240,7 @@
                                 <div class="form-group">
                                     <div class="form-line">
                                         <input type="text" name="telp" class="form-control date" placeholder="Phone">
-                                        <input type="hidden" name="id_customer" value="{{$customer->id_customer}}">
+                                        <input type="hidden" name="customer_id" value="{{$customer->customer_id}}">
                                     </div>
                                 </div>
                         </div>
@@ -274,10 +274,10 @@
                         <tbody>
                             @foreach($price as $row)
                             <tr>
-                                <td>{{$row->getKategori->kendaraan}}</td>
+                                <td>{{$row->get_kategori->kendaraan}}</td>
                                 <td>Rp.{{number_format($row->harga,0)}}</td>
                                 <td>
-                                    <form action="{{ route('pricing.destroy', $row->id_price)}}" method="post">
+                                    <form action="{{ route('pricing.destroy', $row->pricing_id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <a onclick="return confirm('Are you sure?')">
@@ -286,7 +286,7 @@
                                         </button>
                                         </a>
                                     </form>
-                                    <a href="{{ route('pricing.edit',$row->id_price)}}">
+                                    <a href="{{ route('pricing.edit',$row->pricing_id)}}">
                                     <button class="btn btn-icon btn-sm btn-info" type="button" style="margin-top:4%">
                                     <i style="color:#fff" class="material-icons">border_color</i>
                                     </button>
@@ -304,7 +304,7 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    <i class="material-icons">person</i>  Operator {{$customer->nama_customer}}
+                    <i class="material-icons">person</i>  Operator {{$customer->name}}
                 </h2>
                 <ul class="header-dropdown m-r--5" style="margin-top:-1%">
                     <button type="button" class="btn btn-info waves-effect" data-toggle="modal" data-target="#defaultModal2">

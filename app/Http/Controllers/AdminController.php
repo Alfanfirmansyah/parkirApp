@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Model\Customer;
-use App\Model\User;
-use App\Model\Transaksi;
+use App\Models\Customer;
+use App\Models\User;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller

@@ -42,10 +42,10 @@
                                     <span class="input-group-addon">
                                     <i class="material-icons">category</i>
                                     </span>
-                                    <select class="form-control show-tick" required name="id_kategori">
+                                    <select class="form-control show-tick" required name="kategori_id">
                                         <option value="">- Select Jenis Kategori- </option>
                                         @foreach($kategori as $row)
-                                        <option value="{{ $row->id_kategori }}">{{ $row->kendaraan }}</option>
+                                        <option value="{{ $row->kategori_id }}">{{ $row->kendaraan }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -55,7 +55,7 @@
                                     </span>
                                     <div class="form-line">
                                         <input type="number" autocomplete="off" name="harga" class="form-control" placeholder="Harga">
-                                        <input type="hidden" autocomplete="off" name="id_customer" value="{{ Auth::user()->id }}">
+                                        <input type="hidden" autocomplete="off" name="customer_id" value="{{ Auth::user()->id }}">
                                     </div>
                                 </div>
                         </div>
@@ -92,7 +92,7 @@
                                 <td>{{$row->getKategori->kendaraan}}</td>
                                 <td>Rp.{{number_format($row->harga,0)}}</td>
                                 <td>
-                                    <form action="{{ route('pricing.destroy', $row->id_price)}}" method="post">
+                                    <form action="{{ route('pricing.destroy', $row->pricing_id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <a onclick="return confirm('Are you sure?')">
@@ -102,7 +102,7 @@
                                         </button>
                                         </a>
                                     </form>
-                                    <a href="{{ route('pricing.edit',$row->id_price)}}">
+                                    <a href="{{ route('pricing.edit',$row->pricing_id)}}">
                                     <button class="btn btn-icon btn-sm btn-info" type="button" style="margin-top:4%">
                                     <i style="color:#fff" class="material-icons">border_color</i>
                                     <span>Update</span>

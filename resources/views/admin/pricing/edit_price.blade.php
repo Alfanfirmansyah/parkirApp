@@ -1,5 +1,5 @@
 @section('title')
-<title>Update Role | Page</title>
+<title>Manage Customer | Page</title>
 @endsection
 @section('leftside')
 <!-- Menu -->
@@ -12,7 +12,7 @@
             <span>Dashboard</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="javascript:void(0);" class="menu-toggle">
             <i class="material-icons">person</i>
             <span>Manage Customer</span>
@@ -30,7 +30,7 @@
             <span>Manage Kategori</span>
             </a>
         </li>
-        <li class="active">
+        <li>
             <a href="/role">
             <i class="material-icons">category</i>
             <span>Manage Role</span>
@@ -48,22 +48,16 @@
 @endsection
 @extends('layouts.templateMaster')
 @section('content')
-<style>
-    #map-canvas{
-    width:100%;
-    height:300px;
-    }
-</style>
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
                 <h2>
-                    Edit Data Role
+                    Edit Data Pricing
                 </h2>
             </div>
             <div class="body">
-                <form method="post" action="{{ route('role.update',$role->id_role) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route('pricing.update',$price->pricing_id) }}" enctype="multipart/form-data">
                     @method('PATCH')
                     @csrf
                     @if ($errors->any())
@@ -77,9 +71,23 @@
                         </div>
                     </div>
                     @endif 
-                    <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <i class="material-icons">category</i>
+                        </span>
+                        <select class="form-control show-tick" required name="kategori_id">
+                            <option value="">- Select Jenis Kategori- </option>
+                            @foreach($kategori as $row)
+                            <option value="{{ $row->kategori_id }}" {{ $price->kategori_id == $row->kategori_id ? 'selected="selected"' : '' }}> {{ $row->kendaraan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <i class="material-icons">attach_money</i>
+                        </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" value="{{$role->role}}" name="role" />
+                            <input type="number" class="form-control" value="{{$price->harga}}" name="harga" />
                         </div>
                     </div>
                     <div class="form-group">

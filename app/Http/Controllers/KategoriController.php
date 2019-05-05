@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Kategori;
+use App\Models\Kategori;
 use DB;
 use \Auth;
 use Illuminate\Support\Facades\Session;
@@ -24,7 +24,7 @@ class KategoriController extends Controller
     public function index()
     {
         $kategori= Kategori::all();
-        return view('admin.kategori.dataKategori',compact('kategori'));
+        return view('admin.kategori.data_kategori',compact('kategori'));
     }
 
 
@@ -78,7 +78,7 @@ class KategoriController extends Controller
     public function edit($id)
     {
         $kategori = Kategori::find($id);
-        return view('admin.kategori.editkategori',compact('kategori'));
+        return view('admin.kategori.edit_kategori',compact('kategori'));
     }
 
     /**

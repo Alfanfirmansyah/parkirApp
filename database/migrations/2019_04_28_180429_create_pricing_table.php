@@ -14,7 +14,7 @@ class CreatePricingTable extends Migration
     public function up()
     {
         Schema::create('pricing', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('pricing_id');
 			$table->unsignedBigInteger('customer_id');
 			$table->unsignedBigInteger('kategori_id');
 			$table->double('harga');

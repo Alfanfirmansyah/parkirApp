@@ -81,7 +81,7 @@
                     @endif 
                     <div class="input-group">
                         <span class="input-group-addon">
-                        <i class="material-icons">person_pin_circle</i>
+                        <i class="material-icons">book</i>
                         </span>                       
                         <div class="form-line">
                             <input type="text" class="form-control" placeholder="Nama Customer" name="name" />

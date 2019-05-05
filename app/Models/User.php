@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\customer;
 
 class User extends Authenticatable
 {
@@ -36,9 +37,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function customer()
+    
+     public function customer()
     {
-        return $this->hasOne(\App\Model\Customer::class, 'id');
+        return $this->belongsTox(\App\Models\Customer::class, 'customer_id');
     }
+
 }

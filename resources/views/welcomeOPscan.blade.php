@@ -43,6 +43,7 @@
         <div class="content">
             <div class="text">TEMPAT PARKING</div>
             <div class="">{{ auth()->user()->customer['name'] }}
+                        
             </div>
         </div>
     </div>
@@ -122,10 +123,10 @@
                             <span class="input-group-addon">
                             <i class="material-icons">category</i>
                             </span>
-                            <select class="form-control show-tick" required name="kat" id="kat">
+                            <select class="form-control show-tick" required name="kategori" id="kategori">
                                 <option value="">- Select Jenis Kendaraan- </option>
                                 @foreach($price as $row)
-                                <option value="{{ $row->id_kategori }} - {{ $row->harga }}">{{ $row->kendaraan }}</option>
+                                <option value="{{ $row->get_kategori->kategori_id }} - {{ $row->harga }}">{{ $row->get_kategori->kendaraan }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -163,7 +164,7 @@
                             </span>
                             <?php $kode = 'TR-'.date('his');?>
                             <div class="form-line">
-                                <input type="text" readonly class="form-control" value="{{ $tgl2 }}" name="" />
+                                <input type="text" readonly class="form-control" value="{{ $tgl }}" name="" />
                                 <input type="hidden" readonly class="form-control" value="{{ $kode }}" name="qrcode" />
                             </div>
                         </div>

@@ -126,7 +126,7 @@
                             <tr>
                                 <td>{{$row->kendaraan}}</td>
                                 <td>
-                                    <form action="{{ route('kategori.destroy', $row->id_kategori)}}" method="post">
+                                    <form action="{{ route('kategori.destroy', $row->kategori_id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <a onclick="return confirm('Are you sure?')">
@@ -136,7 +136,7 @@
                                         </button>
                                         </a>
                                     </form>
-                                    <a href="{{ route('kategori.edit',$row->id_kategori)}}">
+                                    <a href="{{ route('kategori.edit',$row->kategori_id)}}">
                                     <button class="btn btn-icon btn-sm btn-info" type="button" style="margin-top:4%">
                                     <i style="color:#fff" class="material-icons">border_color</i>
                                     <span>Update</span>

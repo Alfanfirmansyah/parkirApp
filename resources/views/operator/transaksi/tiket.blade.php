@@ -44,7 +44,7 @@
                     <div class="card">
                         <div class="header bg-cyan">
                             <h2>
-                                <i class="material-icons">local_parking</i>{{ auth()->user()->customer->name }}<small>Ticket Parking</small>
+                                <i class="material-icons">local_parking</i>{{ auth()->user()->customer['name'] }}<small>Ticket Parking</small>
                             </h2>
                             <ul class="header-dropdown m-r--5">
                                 <li>

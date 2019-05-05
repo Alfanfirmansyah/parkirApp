@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Customer;
-use App\Model\User;
-use App\Model\Pricing;
+use App\Models\Customer;
+use App\Models\User;
+use App\Models\Pricing;
 use \Auth;
+use Illuminate\Support\Facades\DB;
 
 class OperatorController extends Controller
 {
@@ -26,15 +27,10 @@ class OperatorController extends Controller
      */
     public function index()
     {
-		$id = \Auth::user()->id;
-        $tgl = date('l, d-m-Y');
-        $tgl2 = date('d-m-Y H:i');
-        $price = Pricing::join('kategori', 'pricing.kategori_id' ,'=', 'kategori.id')
-						->join('customer', 'pricing.customer_id' ,'=', 'customer.id')
-						->where('customer.id', '=' ,auth()->user()->customer_id)
-						->select('kategori.*','pricing.*')
-						->get();
-		return view('welcomeOPscan', compact('tgl','tgl2','price'));
+        $id     = \Auth::user()->customer_id;
+        $tgl    = date('l, d-m-Y');
+        $price  = Pricing::with('get_kategori')->where('customer_id', $id)->get();
+		return view('welcomeOPscan', compact('tgl','price'));
     }
 
     public function profil()
@@ -50,3 +46,6 @@ class OperatorController extends Controller
     }
 
 }
+
+
+

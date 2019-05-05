@@ -77,19 +77,19 @@
                             @foreach($customer as $row)
                             <tr>
                                 <td>
-                                    <a href="{{ route('customer.show',$row->id_customer)}}">
+                                    <a href="{{ route('customer.show',$row->customer_id)}}">
                                     <button class="btn btn-icon btn-sm btn-success" type="button" style="margin-top:4%">
                                     <i style="color:#fff" class="material-icons">dashboard</i>
                                     <span>Detail</span>
                                     </button>
                                     </a>
-                                    <a href="{{ route('customer.edit',$row->id_customer)}}">
+                                    <a href="{{ route('customer.edit',$row->customer_id)}}">
                                     <button class="btn btn-icon btn-sm btn-info" type="button" style="margin-top:4%;width:96px">
                                     <i style="color:#fff" class="material-icons">border_color</i>
-                                    <span>Update</span>
+                                    <span>Edit</span>
                                     </button>
                                     </a>
-                                    <form action="{{ route('customer.destroy', $row->id_customer)}}" method="post" style="margin-top:4%";>
+                                    <form action="{{ route('customer.destroy', $row->customer_id)}}" method="post" style="margin-top:4%";>
                                         @csrf
                                         @method('DELETE')
                                         <a onclick="return confirm('Are you sure?')">
@@ -100,7 +100,7 @@
                                         </a>
                                     </form>
                                 </td>
-                                <td>{{$row->nama_customer}}</td>
+                                <td>{{$row->name}}</td>
                                 <td>{{$row->address}}</td>
                                 <td><img style="width:200px; height:170px" src="{{ asset('/images/'.array_first(json_decode($row->image))) }}" /></td>
                             </tr>
