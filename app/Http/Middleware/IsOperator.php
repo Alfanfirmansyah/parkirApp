@@ -15,7 +15,7 @@ class IsOperator
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->check() && $request->user()->id_role == '1'){
+        if (auth()->check() && $request->user()->role_id == '1'){
 			return redirect()->guest('/admin');
 		}
         return $next($request);

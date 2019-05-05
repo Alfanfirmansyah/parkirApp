@@ -1,18 +1,18 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Pricing extends Model
 {
      protected $table = "pricing";
-     protected $primaryKey = 'id_price';
+     protected $primaryKey = 'id';
 	 protected $fillable = [
-        'id_kategori','harga','id_customer'
+        'kategori_id','harga','customer_id'
      ];
 	 
 	 public function getKategori(){
-        return $this->belongsTo('App\Kategori', 'id_kategori', 'id_kategori');
+        return $this->belongsTo('\App\Model\Kategori', 'kategori_id', 'id');
     }
 }

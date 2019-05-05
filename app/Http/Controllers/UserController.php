@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Model\User;
 use DB;
 use Illuminate\Support\Facades\Hash;
 use \Auth;
@@ -24,8 +24,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user= User::where('id_role',1)->get();
-        return view('admin.user.Datauser',compact('user'));
+        $user= User::where('role_id',1)->get();
+        return view('admin.user.datauser',compact('user'));
     }
 
 
@@ -64,8 +64,8 @@ class UserController extends Controller
           'address' => $request->get('address'),
           'telp'    => $request->get('telp'),
           'foto'    => $imageName,
-          'id_role' => 1,
-          'id_customer' =>0
+          'role_id' => 1,
+          'customer_id' =>0
           ]);
           $user->save();
           return redirect('/admin')->with('success','Berhasil Menambah Data');
@@ -92,7 +92,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('admin.user.EditUser',compact('user'));
+        return view('admin.user.editUser',compact('user'));
     }
 
     /**

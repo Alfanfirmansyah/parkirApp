@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Place;
-use App\Pricing;
-use App\Transaksi;
-use App\Customer;
+use App\Model\Pricing;
+use App\Model\Transaksi;
+use App\Model\Customer;
 use DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use \Auth;
@@ -22,7 +21,7 @@ class TransaksiController extends Controller
     {
         $transaksi  = Transaksi::with('get_kategori')->where('status','masuk')->get();
         $keluar     = Transaksi::with('get_kategori')->where('status','keluar')->get();
-        return view('operator.transaksi.DataTransaksi',compact('transaksi','keluar'));
+        return view('operator.transaksi.dataTransaksi',compact('transaksi','keluar'));
         
     }
 
@@ -47,21 +46,19 @@ class TransaksiController extends Controller
         $id = \Auth::user()->id_customer;
          $request->validate([
             'no_plat'     =>'required',
-            'kat'       =>'required',
+            'kat'         =>'required',
         ]);
        
           $qrcode = $request->get('qrcode');
-          $customer = Customer::where('id_customer', auth()->user()->id_customer )
-          ->select('nama_customer')
-          ->get();
+       
 
           $Transaksi = new Transaksi([
           'kode_qrcode'     => $qrcode,
           'no_plat'         => $request->get('no_plat'),
-          'id_kategori'     => substr($request->get('kat'),0,1),
+          'kategori_id'     => substr($request->get('kat'),0,1),
           'harga'     	    => substr($request->get('kat'),3,5),
           'tgl_keluar'      => '',
-          'id_customer'     => $id,
+          'customer_id'     => $id,
           'status'          => 'masuk',
           ]);
           $Transaksi->save();
@@ -70,9 +67,9 @@ class TransaksiController extends Controller
           ->select('tgl_masuk','no_plat','harga','kode_qrcode')
           ->get();
 
-          $tiket = QrCode::size(250)->generate($qrcode);
+          $qrdoce = QrCode::size(250)->generate($qrcode);
            
-          return view('operator.transaksi.tiket',compact('tiket','trs','customer'));
+          return view('operator.transaksi.tiket',compact('qrcode','trs'));
     }  
 
     public function checkout(Request $request){
@@ -95,7 +92,7 @@ class TransaksiController extends Controller
 
     public function getHarga($id) 
 	{        
-        $harga = DB::table("pricing")->where("id_price",$id)->pluck("harga","harga");
+        $harga = DB::table("pricing")->where("id",$id)->pluck("harga","harga");
         return json_encode($harga);
 	}
     /**
@@ -104,6 +101,7 @@ class TransaksiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+	 
     public function show($id)
     {
         //

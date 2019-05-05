@@ -20,8 +20,8 @@ class UsersSeed extends Seeder
         	'foto' => 'icon.jpg',
         	'address' => 'Jl.Ngamarto Lawang',
         	'telp' => '080000000',
-        	'id_role' => '1',
-        	'id_customer' => '0'
+        	'role_id' => '1',
+        	'customer_id' => '0'
         ],
 		[
         	'name' => 'Operator',
@@ -31,8 +31,8 @@ class UsersSeed extends Seeder
         	'foto' => 'icon.jpg',
         	'address' => 'Mlg',
         	'telp' => '080000000',
-        	'id_role' => '2',
-        	'id_customer' => '1'
+        	'role_id' => '2',
+        	'customer_id' => '1'
         ]
 		
 		]);

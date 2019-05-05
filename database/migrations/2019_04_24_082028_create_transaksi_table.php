@@ -14,10 +14,10 @@ class CreateTransaksiTable extends Migration
     public function up()
     {
         Schema::create('transaksi', function (Blueprint $table) {
-            $table->bigIncrements('id_transaksi');
+            $table->bigIncrements('id');
 			$table->string('kode_qrcode',50)->unique();
-			$table->unsignedBigInteger('id_customer');
-			$table->integer('id_kategori');
+			$table->unsignedBigInteger('customer_id');
+			$table->integer('kategori_id');
 			$table->double('harga');
 			$table->string('no_plat');
 			$table->timestamp('tgl_masuk')->useCurrent();

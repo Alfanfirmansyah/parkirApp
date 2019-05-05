@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Customer;
-use App\User;
-use App\Pricing;
-use App\Kategori;
+use App\Model\Customer;
+use App\Model\User;
+use App\Model\Pricing;
+use App\Model\Kategori;
 use DB;
 use \Auth;
 use Illuminate\Support\Facades\Session;
@@ -24,14 +24,12 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+	 
+    public function index()
     {
         $customer= Customer::all();
-        return view('admin.customer.DataCustomer',compact('customer'));
-        
+        return view('admin.customer.dataCustomer',compact('customer'));
     }
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -40,7 +38,7 @@ class CustomerController extends Controller
     public function create()
     {  
         $tgl = date('l, d-m-Y');
-        return view('admin.customer.CreateCustomer',compact('tgl'));
+        return view('admin.customer.createCustomer',compact('tgl'));
     }
 
     /**
@@ -52,7 +50,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_customer'  =>'required',
+            'name' 			 =>'required',
             'address'        =>'required',
             'latitude'       =>'required',
             'longitude'      =>'required',
@@ -72,7 +70,7 @@ class CustomerController extends Controller
         }
 		
           $customer = new Customer([
-          'nama_customer'   => $request->get('nama_customer'),
+          'name' 		    => $request->get('name'),
           'address'         => $request->get('address'),
           'latitude'        => $request->get('latitude'),
           'longitude'       => $request->get('longitude'),
@@ -92,10 +90,10 @@ class CustomerController extends Controller
     public function show($id)
     {
         $customer   = Customer::find($id);
-		$price      = Pricing::where('id_customer', '=',[$id])->get();
-		$userop     = User::where('id_role',2)->get();
+		$price      = Pricing::where('customer_id', '=',[$id])->get();
+		$userop     = User::where('role_id',2)->get();
 		$kategori   = Kategori::all();
-        return view('admin.customer.DetailCustomer',compact('customer','price','kategori','userop'));
+        return view('admin.customer.detailCustomer',compact('customer','price','kategori','userop'));
     }
 
     /**
@@ -107,7 +105,7 @@ class CustomerController extends Controller
     public function edit($id)
     {
         $customer = Customer::find($id);
-        return view('admin.customer.EditCustomer',compact('customer'));
+        return view('admin.customer.editCustomer',compact('customer'));
     }
 
     /**
@@ -120,14 +118,14 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-                'nama_customer'     =>'required',
+                'name'    		 =>'required',
                 'address'        =>'required',
                 'latitude'       =>'required',
                 'longitude'      =>'required',
                 
             ]);
                 $customer = Customer::find($id);
-                $customer->nama_customer    = $request->get('nama_customer');
+                $customer->name 		    = $request->get('name');
                 $customer->address          = $request->get('address');
                 $customer->latitude         = $request->get('latitude');
                 $customer->longitude        = $request->get('longitude');

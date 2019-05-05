@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Model\User;
 use DB;
 use Illuminate\Support\Facades\Hash;
 use \Auth;
@@ -57,7 +57,7 @@ class UserOPController extends Controller
         $imageName = time().'.'.$request->foto->getClientOriginalExtension();
         $request->foto->move(public_path('images'), $imageName);
 
-        $key = $request->get('id_customer');
+        $key = $request->get('customer_id');
         $user = new User([
           'name'    => $request->get('name'),
           'password' => Hash::make($request->get('password')),
@@ -65,8 +65,8 @@ class UserOPController extends Controller
           'address' => $request->get('address'),
           'telp'    => $request->get('telp'),
           'foto'    => $imageName,
-          'id_role' => 2,
-          'id_customer' => $request->get('id_customer')
+          'role_id' => 2,
+          'customer_id' => $request->get('customer_id')
           ]);
           $user->save();
           return redirect('/customer/'.$key)->with('success2','Berhasil Menambah Data');
@@ -94,7 +94,7 @@ class UserOPController extends Controller
     {
         $user = User::find($id);
        
-        return view('admin.userop.EditOperator',compact('user'));
+        return view('admin.userop.editOperator',compact('user'));
     }
 
     /**
@@ -115,7 +115,7 @@ class UserOPController extends Controller
         ]);
         
         $user = User::find($id);
-        $key = $user->id_customer;
+        $key = $user->customer_id;
 
         if(empty($request->foto)){
             $user = User::find($id);
@@ -149,7 +149,7 @@ class UserOPController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        $key = $user->id_customer;
+        $key = $user->customer_id;
         $user->delete();
         return redirect('/customer/'.$key)->with('success', 'Data user Berhasil Dihapus');
     }

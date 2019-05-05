@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Customer;
-use App\User;
-use App\Transaksi;
+use App\Model\Customer;
+use App\Model\User;
+use App\Model\Transaksi;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -28,7 +28,7 @@ class AdminController extends Controller
         $tgl = date('l, d-m-Y');
         $customer   = Customer::count();
         $keluar     = Transaksi::where('status','keluar')->count();
-        $user       = User::where('id_role','2')->count();
+        $user       = User::where('role_id','2')->count();
         return view('welcome',compact('tgl','customer','user','keluar'));
     }
 }

@@ -2,33 +2,6 @@
 <title>Manage Customer | Page</title>
 @endsection
 @section('leftside')
-<!-- Left Sidebar -->
-<!-- User Info -->
-<div class="user-info">
-    <div class="image">
-        <img src="{{ asset('assets/images/user.png')}}" width="48" height="48" alt="User" />
-    </div>
-    <div class="info-container">
-        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->name }} </div>
-        <div class="email"> {{ Auth::user()->email }} </div>
-        <div class="btn-group user-helper-dropdown">
-            <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
-            <ul class="dropdown-menu pull-right">
-                <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
-                <li role="separator" class="divider"></li>
-                <li>  <a class="dropdown-item" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-                    <i class="material-icons">input</i>Sign Out</a>
-                </li>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- #User Info -->
 <!-- Menu -->
 <div class="menu">
     <ul class="list">
@@ -72,16 +45,6 @@
     </ul>
 </div>
 <!-- #Menu -->
-<!-- Footer -->
-<div class="legal">
-    <div class="copyright">
-        &copy; 2016 - 2017 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
-    </div>
-    <div class="version">
-        <b>Version: </b> 1.0.5
-    </div>
-</div>
-<!-- #Footer -->
 @endsection
 @extends('layouts.templateMaster')
 @section('content')
@@ -121,7 +84,7 @@
                         <i class="material-icons">person_pin_circle</i>
                         </span>                       
                         <div class="form-line">
-                            <input type="text" class="form-control" placeholder="Nama Customer" name="nama_customer" />
+                            <input type="text" class="form-control" placeholder="Nama Customer" name="name" />
                         </div>
                     </div>
                     <div class="input-group control-group increment" >
@@ -152,8 +115,7 @@
                     <div class="col-md-6">
                         <label for="">Longitude</label>
                         <input class="form-control" id="lng" type="text" name="longitude" placeholder="longitude" class="validate" required>
-                        <input type="hidden" name="id_user" value="{{ Auth::user()->id}}">
-                        <input type="hidden" name="status" value="Belum diverifikasi">
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id}}">
                     </div>
                     <div class="form-group">
                         <button type="Submit" class="btn btn-info waves-effect" data-toggle="modal" data-target="#defaultModal">
