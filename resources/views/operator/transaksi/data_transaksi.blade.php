@@ -3,7 +3,7 @@
 <title>Manage Data Parkir | Page</title>
 @endsection
 @section('leftside')
-@include('layouts.sidebarTransaksi')
+@include('layouts.sidebarDataTransaksi')
 @endsection
 @section('content')  
 <div class="row clearfix">

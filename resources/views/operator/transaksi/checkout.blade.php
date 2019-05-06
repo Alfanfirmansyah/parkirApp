@@ -48,25 +48,24 @@
                                 </div>
                                 <div style="margin-left:25px; margin-top:20px" class="col-md-2">
                                     <br> 
-                                    <h5>
-                                        Kode Parking  <br><br>
-                                        No Plat       <br><br>
-                                        Tanggal Masuk <br><br>
-                                        Tgl Masuk     <br><br>
-                                    </h5>
+                                    	Kode Parking   <br><br>
+                                        No Plat        <br><br>
+                                        Tanggal Keluar <br><br>
+                                        Harga      	   <br><br>
                                 </div>
                                 <div style="margin-top:20px;" class="col-md-6">
                                     <br> 
                                     <h5>
-                                        @foreach ($transaksi as $row)
-                                        {{$row->kode_qrcode}}   <br><br>
-                                        {{$row->no_plat}}       <br><br>
-                                        {{$row->tgl_masuk}}     <br><br>
-                                        {{$row->status}}        <br><br>
+                                        @foreach ($checkout as $row)
+                                        {{$row->kode_qrcode}} <br><br>
+                                        {{$row->no_plat}} <br><br>
+                                        {{$row->tgl_keluar}} <br><br>
+                                        {{$row->status}} <br><br>
+                                        Rp.{{number_format($row->harga,0)}} <br><br>
                                         @endforeach
                                     </h5>
                                 </div>
-                          
+          
                             </div>
                         </div>
                     </div>

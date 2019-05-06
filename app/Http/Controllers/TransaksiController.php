@@ -63,14 +63,12 @@ class TransaksiController extends Controller
           'status'          => 'masuk',
           ]);
           $Transaksi->save();
-          return redirect('/operator')->with('success', 'Berhasil melakukan checkin parkir');
+          $transaksi = Transaksi::where('kode_qrcode', $qrcode )->get();
+          $qrcode    = QrCode::size(250)->generate($qrcode);
+          return view('operator.transaksi.tiket',compact('qrcode','transaksi')); 
     }  
 
-    public function getHarga($id) 
-	{        
-        $harga = DB::table("pricing")->where("id",$id)->pluck("harga","harga");
-        return json_encode($harga);
-	}
+  
     /**
      * Display the specified resource.
      *
@@ -118,13 +116,18 @@ class TransaksiController extends Controller
              $transaksi->status = 'keluar';
              $transaksi->tgl_keluar = date('Y-m-d h:i:s');
              $transaksi->save();
-             $checkout = Transaksi::where('kode_qrcode', $qrcode )
-                          ->select('tgl_keluar','no_plat','harga','kode_qrcode','status')->get();
+             $checkout = Transaksi::where('kode_qrcode', $qrcode )->get();
              $qrcode   = QrCode::size(250)->generate($qrcode);
-             return view('operator.transaksi.tiket',compact('qrcode','checkout')); 
+             return view('operator.transaksi.checkout',compact('qrcode','checkout')); 
         }
       
     }
+
+    // public function getHarga($id) 
+    // {        
+    //     $harga = DB::table("pricing")->where("pricing_id",$id)->pluck("harga","harga");
+    //     return json_encode($harga);
+    // }
 
     /**
      * Remove the specified resource from storage.
