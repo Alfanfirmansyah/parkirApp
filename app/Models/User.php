@@ -40,7 +40,7 @@ class User extends Authenticatable
     
      public function customer()
     {
-        return $this->belongsTox(\App\Models\Customer::class, 'customer_id');
+        return $this->belongsTo(\App\Models\Customer::class, 'customer_id');
     }
 
 }

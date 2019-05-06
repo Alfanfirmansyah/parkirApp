@@ -1,53 +1,11 @@
+@extends('layouts.templateMaster')
 @section('title')
-<title>Manage Customer | Page</title>
+<title>Detail Customer | Page</title>
 @endsection
 @section('leftside')
-<!-- Menu -->
-<div class="menu">
-    <ul class="list">
-        <li class="header">MAIN NAVIGATION</li>
-        <li>
-            <a href="/admin">
-            <i class="material-icons">dashboard</i>
-            <span>Dashboard</span>
-            </a>
-        </li>
-        <li class="active">
-            <a href="javascript:void(0);" class="menu-toggle">
-            <i class="material-icons">person</i>
-            <span>Manage Customer</span>
-            </a>
-            <ul class="ml-menu">
-                <li>
-                    <a href="/customer/create">Add Customer</a>
-                    <a href="/customer">Data Customer</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="/kategori">
-            <i class="material-icons">list</i>
-            <span>Manage Kategori</span>
-            </a>
-        </li>
-        <li>
-            <a href="/role">
-            <i class="material-icons">category</i>
-            <span>Manage Role</span>
-            </a>
-        </li>
-        <li>
-            <a href="/user">
-            <i class="material-icons">person</i>
-            <span>Manage Admin</span>
-            </a>
-        </li>
-    </ul>
-</div>
-<!-- #Menu -->
+@include('layouts.sidebarCustomer')
 @endsection
-@extends('layouts.templateMaster')
-@section('content')  
+@section('content') 
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
@@ -67,34 +25,8 @@
                 <div class="row clearfix">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="col-md-6">
-                            <div id="carousel-example-generic_{{$customer->customer_id}}" class="carousel slide" data-ride="carousel">
-                                <!-- Indicators -->
-                                <ol class="carousel-indicators">
-                                    <?php $a = 0 ?>
-                                    <?php foreach (json_decode($customer->image)as $gambar) { ?>
-                                    <li data-target="#carousel-example-generic_{{$customer->id}}" data-slide-to="$a++" class=""></li>
-                                    <?php } ?>
-                                </ol>
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="item active">
-                                        <img style="width:100%; height:320px" src="{{ asset('/images/'.array_first(json_decode($customer->image))) }}" />
-                                    </div>
-                                    <?php foreach (json_decode($customer->image)as $gambar) { ?>									
-                                    <div class="item">
-                                        <img style="width:100%; height:320px" src="{{ asset('/images/'.$gambar) }}">
-                                    </div>
-                                    <?php } ?>
-                                </div>
-                                <!-- Controls -->
-                                <a class="left carousel-control" href="#carousel-example-generic_{{$customer->customer_id}}" role="button" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#carousel-example-generic_{{$customer->customer_id}}" role="button" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                                </a>
+                            <div class="item">
+                                <img style="width:100%; height:320px" src="{{ asset('/images/'.$customer->image) }}">
                             </div>
                             <br>
                             <p><i class="fa fa-map-marker"></i> {{$customer->address}}</p>
@@ -188,74 +120,74 @@
                 </div>
             </div>
             <div class="body">
-                        <!-- Modal Operaotr-->
-            <div class="modal fade" id="defaultModal2" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <center>
-                                <h4 class="modal-title" id="defaultModalLabel">Form Data Operator</h4>
-                                <hr>
-                            </center>
+                <!-- Modal Operaotr-->
+                <div class="modal fade" id="defaultModal2" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <center>
+                                    <h4 class="modal-title" id="defaultModalLabel">Form Data Operator</h4>
+                                    <hr>
+                                </center>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="{{ route('userop.store') }}" enctype="multipart/form-data">
+                                    @csrf
+                                    @if ($errors->any())
+                                    <div class="col-md-10">
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    @endif 
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name="name" class="form-control date" placeholder="Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="password" name="password" class="form-control date" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name="email" class="form-control date" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <textarea rows="3" name="address" class="form-control date" placeholder="Address"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="file" name="foto" class="form-control date" placeholder="Foto">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" name="telp" class="form-control date" placeholder="Phone">
+                                            <input type="hidden" name="customer_id" value="{{$customer->customer_id}}">
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="Submit" class="btn btn-info waves-effect">
+                            <i style="color:#fff" class="material-icons">save</i>
+                            <span>SAVE</span>
+                            </button>
+                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                            </div>
+                            </form>
                         </div>
-                        <div class="modal-body">
-                            <form method="post" action="{{ route('userop.store') }}" enctype="multipart/form-data">
-                                @csrf
-                                @if ($errors->any())
-                                <div class="col-md-10">
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
-                                @endif 
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" name="name" class="form-control date" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="password" name="password" class="form-control date" placeholder="Password">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" name="email" class="form-control date" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <textarea rows="3" name="address" class="form-control date" placeholder="Address"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="file" name="foto" class="form-control date" placeholder="Foto">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" name="telp" class="form-control date" placeholder="Phone">
-                                        <input type="hidden" name="customer_id" value="{{$customer->customer_id}}">
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="Submit" class="btn btn-info waves-effect">
-                        <i style="color:#fff" class="material-icons">save</i>
-                        <span>SAVE</span>
-                        </button>
-                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                        </div>
-                        </form>
                     </div>
                 </div>
-            </div>
-            <!-- End Modal -->
+                <!-- End Modal -->
                 <div class="table-responsive">
                     @if(session()->get('success'))
                     <div class="alert alert-success alert-close">
@@ -332,7 +264,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($userop as $row)
+                            @foreach($operator as $row)
                             <tr>
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->telp}}</td>

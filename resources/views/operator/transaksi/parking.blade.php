@@ -1,28 +1,10 @@
+@extends('layouts.templateOPMaster')
 @section('title')
-<title>Data Transaksi Parkir | Page</title>
+<title>Transaksi Parkir | Page</title>
 @endsection
 @section('leftside')
-<!-- Menu -->
-<div class="menu">
-    <ul class="list">
-        <li class="header">MAIN NAVIGATION</li>
-        <li class="active">
-            <a href="{{ url('operator')}}">
-            <i class="material-icons">dashboard</i>
-            <span>Manage Parking</span>
-            </a>
-        </li>
-        <li>
-            <a href="/transaksi">
-            <i class="material-icons">subject</i>
-            <span>Data Parkir</span>
-            </a>
-        </li>
-    </ul>
-</div>
-<!-- #Menu -->
+@include('layouts.sidebarTransaksi')
 @endsection
-@extends('layouts.templateOPMaster')
 @section('content')
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
     <div class="info-box bg-indigo">

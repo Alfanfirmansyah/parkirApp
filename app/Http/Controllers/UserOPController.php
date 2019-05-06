@@ -93,8 +93,7 @@ class UserOPController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-       
-        return view('admin.userop.editOperator',compact('user'));
+        return view('admin.operator.edit_operator',compact('user'));
     }
 
     /**

@@ -30,7 +30,7 @@ class OperatorController extends Controller
         $id     = \Auth::user()->customer_id;
         $tgl    = date('l, d-m-Y');
         $price  = Pricing::with('get_kategori')->where('customer_id', $id)->get();
-		return view('welcomeOPscan', compact('tgl','price'));
+		return view('operator.transaksi.parking', compact('tgl','price'));
     }
 
     public function profil()

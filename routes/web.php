@@ -16,13 +16,13 @@ Route::get('/', 'HomeController@index');
 Auth::routes();
 
 Route::group(['middleware' => IsAdmin::class], function () {
-	Route::get('/admin', 'AdminController@index');
 	Route::resource('customer','CustomerController');
 	Route::post('/updateImgParking/{id}', 'CustomerController@updateImg');
 	Route::resource('role','RoleController');
 	Route::resource('pricing','PriceController');
 	Route::resource('kategori','KategoriController');
 	Route::resource('user','UserController');
+	Route::get('admin', 'UserController@dashboard');
 	Route::resource('userop','UserOPController');
 });
 

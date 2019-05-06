@@ -2,49 +2,7 @@
 <title>Manage Customer | Page</title>
 @endsection
 @section('leftside')
-<!-- Menu -->
-<div class="menu">
-    <ul class="list">
-        <li class="header">MAIN NAVIGATION</li>
-        <li>
-            <a href="/admin">
-            <i class="material-icons">dashboard</i>
-            <span>Dashboard</span>
-            </a>
-        </li>
-        <li class="active">
-            <a href="javascript:void(0);" class="menu-toggle">
-            <i class="material-icons">person</i>
-            <span>Manage Customer</span>
-            </a>
-            <ul class="ml-menu">
-                <li>
-                    <a href="/customer/create">Add Customer</a>
-                    <a href="/customer">Data Customer</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="/kategori">
-            <i class="material-icons">list</i>
-            <span>Manage Kategori</span>
-            </a>
-        </li>
-        <li>
-            <a href="/role">
-            <i class="material-icons">category</i>
-            <span>Manage Role</span>
-            </a>
-        </li>
-        <li>
-            <a href="/user">
-            <i class="material-icons">person</i>
-            <span>Manage Admin</span>
-            </a>
-        </li>
-    </ul>
-</div>
-<!-- #Menu -->
+@include('layouts.sidebarCustomer')
 @endsection
 @extends('layouts.templateMaster')
 @section('content')
@@ -56,6 +14,7 @@
 </style>
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAafgoWn7nSfw4o5ctci8yvyWOQmAD93g4&libraries=places"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
 <!-- Vertical Layout -->
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -87,20 +46,9 @@
                             <input type="text" class="form-control" placeholder="Nama Customer" name="name" />
                         </div>
                     </div>
-                    <div class="input-group control-group increment" >
+                    <div class="input-group" >
                         <label for="">Image </label>
-                        <input type="file" name="filename[]" class="form-control">
-                        <div class="input-group-btn"> 
-                            <button class="btn btn-primary waves-effect" type="button"><i class="fa fa-plus"></i> Add</button>
-                        </div>
-                    </div>
-                    <div class="clone hide">
-                        <div class="control-group input-group" style="margin-top:10px">
-                            <input type="file" name="filename[]" class="form-control">
-                            <div class="input-group-btn"> 
-                                <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                            </div>
-                        </div>
+                        <input type="file" name="image" class="form-control">
                     </div>
                     <div class="col s12">
                         <label for="">Address</label>
@@ -128,21 +76,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function() {
-    
-    $(".btn-primary").click(function(){ 
-        var html = $(".clone").html();
-        $(".increment").after(html);
-    });
-    
-    $("body").on("click",".btn-danger",function(){ 
-        $(this).parents(".control-group").remove();
-    });
-    
-    });
-    
-</script>
+
 <script type="text/javascript">
     var map = new google.maps.Map(document.getElementById('map-canvas')
         ,{

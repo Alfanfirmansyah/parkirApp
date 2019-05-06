@@ -2,50 +2,7 @@
 <title>Manage Admin | Page</title>
 @endsection
 @section('leftside')
-<!-- Left Sidebar -->
-<!-- Menu -->
-<div class="menu">
-    <ul class="list">
-        <li class="header">MAIN NAVIGATION</li>
-        <li>
-            <a href="/admin">
-            <i class="material-icons">dashboard</i>
-            <span>Dashboard</span>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0);" class="menu-toggle">
-            <i class="material-icons">person</i>
-            <span>Manage Customer</span>
-            </a>
-            <ul class="ml-menu">
-                <li>
-                    <a href="/customer/create">Add Customer</a>
-                    <a href="/customer">Data Customer</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="/kategori">
-            <i class="material-icons">list</i>
-            <span>Manage Kategori</span>
-            </a>
-        </li>
-        <li>
-            <a href="/role">
-            <i class="material-icons">category</i>
-            <span>Manage Role</span>
-            </a>
-        </li>
-        <li class="active">
-            <a href="/user">
-            <i class="material-icons">person</i>
-            <span>Manage Admin</span>
-            </a>
-        </li>
-    </ul>
-</div>
-<!-- #Menu -->
+@include('layouts.sidebarUser')
 @endsection
 @extends('layouts.templateMaster')
 @section('content')  
@@ -170,9 +127,9 @@
                                         </a>
                                     </form>
                                     <a href="{{ route('user.edit',$row->id)}}">
-                                    <button class="btn btn-icon btn-sm btn-info" type="button" style="margin-top:4%">
+                                    <button class="btn btn-icon btn-sm btn-info" type="button" style="margin-top:4%;width:84px">
                                     <i style="color:#fff" class="material-icons">border_color</i>
-                                    <span>Update</span>
+                                    <span>Edit</span>
                                     </button>
                                     </a>
                                 </td>

@@ -1,29 +1,11 @@
+@extends('layouts.templateOPMaster')
 @section('title')
-<title>Ticket Parking | Page</title>
+<title>Tiket Parkir | Page</title>
 @endsection
 @section('leftside')
-<!-- Menu -->
-<div class="menu">
-    <ul class="list">
-        <li class="header">MAIN NAVIGATION</li>
-        <li class="active">
-            <a href="{{ url('operator')}}">
-            <i class="material-icons">dashboard</i>
-            <span>Manage Parking</span>
-            </a>
-        </li>
-        <li>
-            <a href="/transaksi">
-            <i class="material-icons">subject</i>
-            <span>Data Parkir</span>
-            </a>
-        </li>
-    </ul>
-</div>
-<!-- #Menu -->
+@include('layouts.sidebarTransaksi')
 @endsection
-@extends('layouts.templateOPMaster')
-@section('content')  
+@section('content')
 <div class="row clearfix">
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="card">
@@ -75,11 +57,12 @@
                                 <div style="margin-top:20px;" class="col-md-6">
                                     <br> 
                                     <h5>
-                                        @foreach ($trs as $tr)
-                                        {{$tr->kode_qrcode}} <br><br>
-                                        {{$tr->no_plat}} <br><br>
-                                        {{$tr->tgl_masuk}} <br><br>
-                                        Rp.{{number_format($tr->harga,0)}} <br><br>
+                                        @foreach ($checkout as $row)
+                                        {{$row->kode_qrcode}} <br><br>
+                                        {{$row->no_plat}} <br><br>
+                                        {{$row->tgl_keluar}} <br><br>
+                                        {{$row->status}} <br><br>
+                                        Rp.{{number_format($row->harga,0)}} <br><br>
                                         @endforeach
                                     </h5>
                                 </div>

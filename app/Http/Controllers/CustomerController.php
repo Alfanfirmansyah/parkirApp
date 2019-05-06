@@ -53,27 +53,18 @@ class CustomerController extends Controller
             'address'        =>'required',
             'latitude'       =>'required',
             'longitude'      =>'required',
-            'filename'       =>'required',
-            'filename.*'     =>'image|mimes:jpeg,png,jpg,gif,svg|max:2048' 
+            'image'          =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048' 
         ]);
     
-        
-	    if($request->hasfile('filename'))
-        {
-            foreach($request->file('filename') as $image)
-            {
-                $name=$image->getClientOriginalName();
-                $image->move(public_path().'/images', $name);  
-                $data[] = $name;  
-            }
-        }
+            $imageName = time().'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('images'), $imageName);
 		
           $customer = new Customer([
           'name' 		    => $request->get('name'),
           'address'         => $request->get('address'),
           'latitude'        => $request->get('latitude'),
           'longitude'       => $request->get('longitude'),
-          'image'           => json_encode($data)
+          'image'           => $imageName
           ]);
           $customer->save();
           return redirect('/customer')->with('success','Berhasil Menambah Data');
@@ -90,9 +81,9 @@ class CustomerController extends Controller
     {
         $customer   = Customer::find($id);
 		$price      = Pricing::where('customer_id', '=',[$id])->get();
-		$userop     = User::where('role_id',2)->where('customer_id',$id)->get();
+		$operator   = User::where('role_id',2)->where('customer_id',$id)->get();
 		$kategori   = Kategori::all();
-        return view('admin.customer.detail_customer',compact('customer','price','kategori','userop'));
+        return view('admin.customer.detail_customer',compact('customer','price','kategori','operator'));
     }
 
     /**
@@ -123,33 +114,31 @@ class CustomerController extends Controller
                 'longitude'      =>'required',
                 
             ]);
-                $customer = Customer::find($id);
+
+            $customer = Customer::find($id);
+             if(empty($request->image)){
                 $customer->name 		    = $request->get('name');
                 $customer->address          = $request->get('address');
                 $customer->latitude         = $request->get('latitude');
                 $customer->longitude        = $request->get('longitude');
                 $customer->save();
-                return redirect('/customer')->with('success', 'Data customer Berhasil Terupdate');                     
+                return redirect('/customer')->with('success', 'Data customer Berhasil Terupdate');
+             } else {
+                $imageName = time().'.'.$request->image->getClientOriginalExtension();
+                $request->image->move(public_path('images'), $imageName);
+
+                $customer->name 		    = $request->get('name');
+                $customer->address          = $request->get('address');
+                $customer->latitude         = $request->get('latitude');
+                $customer->longitude        = $request->get('longitude');
+                $customer->image            = $imageName;
+                $customer->save();
+                return redirect('/customer')->with('success', 'Data customer Berhasil Terupdate');
+             }                     
     }
-    public function updateImg(Request $request, $id)
-    {
-       $request->validate([
-            'filename'     =>'required',
-        ]);
-                  $customer = Customer::find($id);
-                   	if($request->hasfile('filename'))
-                    {
-                        foreach($request->file('filename') as $image)
-                        {
-                            $name=$image->getClientOriginalName();
-                            $image->move(public_path().'/images', $name);  
-                            $data[] = $name;  
-                        }
-                    }
-                    $customer->image        = json_encode($data);
-                    $customer->save();
-                    return redirect('/customer/'.$id.'/edit')->with('success', 'Data customer Berhasil Terupdate');                
-    }
+
+
+   
     /** 
      * Remove the specified resou   rce from storage.
      *

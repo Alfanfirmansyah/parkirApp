@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Customer;
+use App\Models\Transaksi;
 use DB;
 use Illuminate\Support\Facades\Hash;
 use \Auth;
@@ -26,6 +28,15 @@ class UserController extends Controller
     {
         $user= User::where('role_id',1)->get();
         return view('admin.user.data_user',compact('user'));
+    }
+
+    public function dashboard()
+    {
+        $tgl = date('l, d-m-Y');
+        $customer   = Customer::count();
+        $keluar     = Transaksi::where('status','keluar')->count();
+        $user       = User::where('role_id','2')->count();
+        return view('welcome',compact('tgl','customer','user','keluar'));
     }
 
 

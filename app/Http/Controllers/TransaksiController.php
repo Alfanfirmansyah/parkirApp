@@ -53,8 +53,6 @@ class TransaksiController extends Controller
         ]);
        
           $qrcode = $request->get('qrcode');
-       
-
           $Transaksi = new Transaksi([
           'kode_qrcode'     => $qrcode,
           'no_plat'         => $request->get('no_plat'),
@@ -65,33 +63,8 @@ class TransaksiController extends Controller
           'status'          => 'masuk',
           ]);
           $Transaksi->save();
-
-          $trs = Transaksi::where('kode_qrcode', $qrcode )
-          ->select('tgl_masuk','no_plat','harga','kode_qrcode')
-          ->get();
-
-          $qrdoce = QrCode::size(250)->generate($qrcode);
-           
-          return view('operator.transaksi.tiket',compact('qrcode','trs'));
+          return redirect('/operator')->with('success', 'Berhasil melakukan checkin parkir');
     }  
-
-    public function checkout(Request $request){
-        $kode = $request->get('qrcode');
-
-        $transaksi = Transaksi::where('kode_qrcode', $kode)->first();
-
-        if(empty($transaksi)){
-
-             return redirect('/operator')->with('danger', 'Gagal melakukan proses, kode parkir tidak tersedia'); 
-
-        }else{
-             $transaksi->status = 'keluar';
-             $transaksi->tgl_keluar = date('Y-m-d h:i:s');
-             $transaksi->save();
-             return redirect('/operator')->with('success', 'Success Checkout parking'); 
-        }
-      
-    }
 
     public function getHarga($id) 
 	{        
@@ -131,6 +104,26 @@ class TransaksiController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function checkout(Request $request){
+        $qrcode = $request->get('qrcode');
+        $transaksi = Transaksi::where('kode_qrcode', $qrcode)->first();
+
+        if(empty($transaksi)){
+
+             return redirect('/operator')->with('danger', 'Gagal melakukan proses, kode parkir tidak tersedia'); 
+
+        }else{
+             $transaksi->status = 'keluar';
+             $transaksi->tgl_keluar = date('Y-m-d h:i:s');
+             $transaksi->save();
+             $checkout = Transaksi::where('kode_qrcode', $qrcode )
+                          ->select('tgl_keluar','no_plat','harga','kode_qrcode','status')->get();
+             $qrcode   = QrCode::size(250)->generate($qrcode);
+             return view('operator.transaksi.tiket',compact('qrcode','checkout')); 
+        }
+      
     }
 
     /**
