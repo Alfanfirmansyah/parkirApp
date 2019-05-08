@@ -52,7 +52,7 @@
                                         Kode Parking  <br><br>
                                         No Plat       <br><br>
                                         Tanggal Masuk <br><br>
-                                        Tgl Masuk     <br><br>
+                                        status        <br><br>
                                     </h5>
                                 </div>
                                 <div style="margin-top:20px;" class="col-md-6">

@@ -14,6 +14,12 @@
             <span>Data Parkir</span>
             </a>
         </li>
+        <li>
+            <a href="/laporan">
+            <i class="material-icons">print</i>
+            <span>Cetak Laporan</span>
+            </a>
+        </li>
     </ul>
 </div>
 <!-- #Menu -->

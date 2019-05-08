@@ -7,6 +7,7 @@ use App\Models\Pricing;
 use App\Models\Transaksi;
 use App\Models\Customer;
 use DB;
+use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use \Auth;
 
@@ -114,13 +115,26 @@ class TransaksiController extends Controller
 
         }else{
              $transaksi->status = 'keluar';
-             $transaksi->tgl_keluar = date('Y-m-d h:i:s');
+             $transaksi->tgl_keluar = date('Y-m-d H:i:s');
              $transaksi->save();
              $checkout = Transaksi::where('kode_qrcode', $qrcode )->get();
              $qrcode   = QrCode::size(250)->generate($qrcode);
-             return view('operator.transaksi.checkout',compact('qrcode','checkout')); 
+             return view('operator.transaksi.checkout',compact('qrcode','checkout'));
+
         }
       
+    }
+
+    public function laporan()
+    {
+        $tgl    = date('l, d-m-Y');
+        return view('operator.laporan.index',compact('tgl'));
+    }
+    public function daily(Request $request){
+        $transaksi = transaksi::where('tgl_keluar','like', $request->get('tgl').'%')
+                              ->where('customer_id','=',Auth::user()->customer_id)
+                              ->get();
+        return view('operator.laporan.daily',compact('transaksi'));
     }
 
     // public function getHarga($id) 

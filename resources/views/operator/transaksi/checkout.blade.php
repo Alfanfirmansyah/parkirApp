@@ -48,20 +48,24 @@
                                 </div>
                                 <div style="margin-left:25px; margin-top:20px" class="col-md-2">
                                     <br> 
-                                    	Kode Parking   <br><br>
-                                        No Plat        <br><br>
-                                        Tanggal Keluar <br><br>
-                                        Harga      	   <br><br>
+                                    	Kode Parking   <hr>
+                                        No Plat        <hr>
+                                        Tanggal Masuk  <hr>
+                                        Tanggal Keluar <hr>
+                                        Harga      	   <hr>
+                                        Status         <hr>
                                 </div>
                                 <div style="margin-top:20px;" class="col-md-6">
                                     <br> 
                                     <h5>
                                         @foreach ($checkout as $row)
-                                        {{$row->kode_qrcode}} <br><br>
-                                        {{$row->no_plat}} <br><br>
-                                        {{$row->tgl_keluar}} <br><br>
-                                        {{$row->status}} <br><br>
-                                        Rp.{{number_format($row->harga,0)}} <br><br>
+                                        {{$row->kode_qrcode}} <hr>
+                                        {{$row->no_plat}} <hr>
+                                        {{$row->tgl_masuk}} <hr>
+                                        {{$row->tgl_keluar}} <hr><br>
+                                        Rp.{{number_format($row->harga,0)}}<hr>
+                                        {{$row->status}} <hr>
+                                      
                                         @endforeach
                                     </h5>
                                 </div>

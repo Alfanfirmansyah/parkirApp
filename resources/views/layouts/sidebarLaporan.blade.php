@@ -2,7 +2,7 @@
 <div class="menu">
     <ul class="list">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active">
+        <li>
             <a href="{{ url('operator')}}">
             <i class="material-icons">dashboard</i>
             <span>Manage Parking</span>
@@ -14,7 +14,7 @@
             <span>Data Parkir</span>
             </a>
         </li>
-        <li>
+        <li class="active">
             <a href="/laporan">
             <i class="material-icons">print</i>
             <span>Cetak Laporan</span>
